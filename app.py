@@ -22,8 +22,10 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 # Generated each time the server starts. Only shown in your terminal.
-ADMIN_PASSWORD = secrets.token_urlsafe(18)
-print(f"\nADMIN PASSWORD: {ADMIN_PASSWORD}\n")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
+
+if not ADMIN_PASSWORD:
+    raise RuntimeError("ADMIN_PASSWORD environment variable is not set.")
 
 # Keep actual scores on the server.
 PRIVATE_GRADES = {}
