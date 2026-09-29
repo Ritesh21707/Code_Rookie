@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Rookie – 3 Round Mock Challenge</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-wrap">
+      <img id="leftLogo" class="brand-logo hidden" alt="Left logo">
+      <div>
+        <div id="brandEyebrow" class="eyebrow">BEGINNER CODING CHALLENGE</div>
+        <h1 id="brandTitle">Code Rookie</h1>
+      </div>
+      <img id="rightLogo" class="brand-logo hidden" alt="Right logo">
+    </div>
+    <div class="header-right">
+      <span id="connectionBadge" class="badge">Checking engine…</span>
+      <button id="adminBtn" class="ghost" hidden>Admin Results</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="welcome" class="panel hero">
+      <div class="hero-copy">
+        <span id="heroBadge" class="round-pill">3 ROUND MOCK</span>
+        <h2 id="heroTitle">Practice the complete competition flow.</h2>
+        <p id="heroDescription">Round 1 tests coding aptitude and MCQs. Round 2 tests debugging and short problem solving. Round 3 evaluates your program against visible and hidden test cases.</p>
+      </div>
+      <form id="startForm" class="start-card">
+        <label><span id="participantLabel">Participant name</span><input id="participant" required maxlength="120" placeholder="Your name"></label>
+        <label><span id="collegeIdLabel">College ID / Roll No.</span><input id="collegeId" maxlength="80" placeholder="Optional"></label>
+        <label><span id="languageLabel">Programming language</span>
+          <select id="language">
+            <option value="python">Python</option>
+            <option value="cpp">C++</option>
+          </select>
+        </label>
+        <p class="result-banner bad">
+  <strong>Quiz rules:</strong>
+  Copying questions is blocked. Switching tabs, minimizing the
+  browser or switching apps will clear all your answers and code.
+  You must then start again from Round 1.
+</p>
+        <button id="startButton" class="primary" type="submit">Start Round 1</button>
+      </form>
+    </section>
+
+    <section id="competition" class="hidden">
+      <div class="progress-row">
+        <div class="step active" data-step="1"><span>1</span> Aptitude & MCQ</div>
+        <div class="step" data-step="2"><span>2</span> Debug & Solve</div>
+        <div class="step" data-step="3"><span>3</span> Test Cases</div>
+        <div class="timer" id="timer">00:00</div>
+      </div>
+      <section id="roundPanel" class="panel"></section>
+    </section>
+
+    <section id="adminPanel" class="panel hidden">
+      <div class="section-head">
+        <div><span class="round-pill">ORGANIZER</span><h2>Saved results</h2></div>
+        <div class="actions"><a class="button-link ghost" href="/api/results.csv">Export CSV</a><button id="closeAdmin" class="ghost">Close</button></div>
+      </div>
+      <div id="resultsTable" class="table-wrap"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

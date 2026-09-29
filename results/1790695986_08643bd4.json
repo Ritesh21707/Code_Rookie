@@ -1,0 +1,109 @@
+{
+  "id": "1790695986_08643bd4",
+  "saved_at": "2026-09-29 21:03:06",
+  "participant": "Ritesh R",
+  "college_id": "25BSR00446",
+  "language": "python",
+  "round1": {
+    "correct": 0,
+    "total": 12,
+    "percent": 0.0,
+    "qualified": false,
+    "review": [
+      {
+        "id": "py17",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Numeric zero is false, but a non-empty string is true."
+      },
+      {
+        "id": "py13",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "The missing key causes get to return the default value 18."
+      },
+      {
+        "id": "py09",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Index -2 selects the second element from the end."
+      },
+      {
+        "id": "py05",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "The list contains three elements after appending 12."
+      },
+      {
+        "id": "py18",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "The trailing comma creates a one-element tuple."
+      },
+      {
+        "id": "py20",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "a and b refer to the same list."
+      },
+      {
+        "id": "py01",
+        "correct": false,
+        "selected": 0,
+        "answer": 1,
+        "explanation": "17 // 5 is 3."
+      },
+      {
+        "id": "py14",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "b defaults to 5, so the function returns 3 + 5."
+      },
+      {
+        "id": "py10",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "continue skips the remainder of the current loop iteration."
+      },
+      {
+        "id": "py16",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "2 + 4 + 6 equals 12."
+      },
+      {
+        "id": "py07",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "import math imports the math module."
+      },
+      {
+        "id": "py03",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Indices 1, 2 and 3 contain ODI."
+      }
+    ]
+  },
+  "round2": {
+    "passed": 0,
+    "total": 10,
+    "percent": 0.0
+  },
+  "round3": {
+    "passed": 1,
+    "total": 30,
+    "percent": 3.33
+  }
+}

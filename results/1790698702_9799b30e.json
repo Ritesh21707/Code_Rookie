@@ -1,0 +1,109 @@
+{
+  "id": "1790698702_9799b30e",
+  "saved_at": "2026-09-29 21:48:22",
+  "participant": "Ritesh R",
+  "college_id": "25BSR00446",
+  "language": "python",
+  "round1": {
+    "correct": 0,
+    "total": 12,
+    "percent": 0.0,
+    "qualified": false,
+    "review": [
+      {
+        "id": "py15",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "Index 5 is outside the list's valid index range."
+      },
+      {
+        "id": "py16",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "2 + 4 + 6 equals 12."
+      },
+      {
+        "id": "py10",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "continue skips the remainder of the current loop iteration."
+      },
+      {
+        "id": "py09",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Index -2 selects the second element from the end."
+      },
+      {
+        "id": "py06",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "Multiplication is evaluated first: 2 + 12 = 14."
+      },
+      {
+        "id": "py12",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "int(\"42\") returns the integer 42."
+      },
+      {
+        "id": "py01",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "17 // 5 is 3."
+      },
+      {
+        "id": "py04",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "The equality comparison operator is ==."
+      },
+      {
+        "id": "py07",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "import math imports the math module."
+      },
+      {
+        "id": "py19",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "sorted returns a new list in ascending order."
+      },
+      {
+        "id": "py08",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "The range starts at 2 and advances by 3, stopping before 9."
+      },
+      {
+        "id": "py03",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Indices 1, 2 and 3 contain ODI."
+      }
+    ]
+  },
+  "round2": {
+    "passed": 0,
+    "total": 5,
+    "percent": 0.0
+  },
+  "round3": {
+    "passed": 1,
+    "total": 15,
+    "percent": 6.67
+  }
+}

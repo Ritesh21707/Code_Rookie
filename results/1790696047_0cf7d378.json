@@ -1,0 +1,109 @@
+{
+  "id": "1790696047_0cf7d378",
+  "saved_at": "2026-09-29 21:04:07",
+  "participant": "Ritesh R",
+  "college_id": "25BSR00446",
+  "language": "python",
+  "round1": {
+    "correct": 0,
+    "total": 12,
+    "percent": 0.0,
+    "qualified": false,
+    "review": [
+      {
+        "id": "py12",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "int(\"42\") returns the integer 42."
+      },
+      {
+        "id": "py13",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "The missing key causes get to return the default value 18."
+      },
+      {
+        "id": "py09",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Index -2 selects the second element from the end."
+      },
+      {
+        "id": "py08",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "The range starts at 2 and advances by 3, stopping before 9."
+      },
+      {
+        "id": "py20",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "a and b refer to the same list."
+      },
+      {
+        "id": "py16",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "2 + 4 + 6 equals 12."
+      },
+      {
+        "id": "py15",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "Index 5 is outside the list's valid index range."
+      },
+      {
+        "id": "py06",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "Multiplication is evaluated first: 2 + 12 = 14."
+      },
+      {
+        "id": "py03",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Indices 1, 2 and 3 contain ODI."
+      },
+      {
+        "id": "py18",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "The trailing comma creates a one-element tuple."
+      },
+      {
+        "id": "py10",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "continue skips the remainder of the current loop iteration."
+      },
+      {
+        "id": "py07",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "import math imports the math module."
+      }
+    ]
+  },
+  "round2": {
+    "passed": 0,
+    "total": 10,
+    "percent": 0.0
+  },
+  "round3": {
+    "passed": 1,
+    "total": 30,
+    "percent": 3.33
+  }
+}

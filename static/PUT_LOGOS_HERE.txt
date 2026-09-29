@@ -1,0 +1,2 @@
+Put logo image files in this folder, then set left_logo/right_logo in ../EDIT_HERE.json.
+Example: /hash-logo.png and /jain-logo.png

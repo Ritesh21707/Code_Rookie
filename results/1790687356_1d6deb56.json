@@ -1,0 +1,172 @@
+{
+  "id": "1790687356_1d6deb56",
+  "saved_at": "2026-09-29 18:39:16",
+  "participant": "Ritesh R",
+  "college_id": "25BSR00446",
+  "language": "python",
+  "round1": {
+    "correct": 0,
+    "total": 12,
+    "percent": 0,
+    "qualified": false,
+    "review": [
+      {
+        "id": "c02",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "Loops repeat a block while a condition or iteration rule is satisfied."
+      },
+      {
+        "id": "p04",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Assignment with = cannot be used as the equality comparison in an if condition; use ==."
+      },
+      {
+        "id": "c01",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "A queue removes items in the same order in which they were inserted."
+      },
+      {
+        "id": "p06",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "An even number has remainder 0 when divided by 2."
+      },
+      {
+        "id": "p03",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "The list contains three elements, so len(x) is 3."
+      },
+      {
+        "id": "p07",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "// performs floor division, so 5 // 2 is 2."
+      },
+      {
+        "id": "c06",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "Linear search examines elements sequentially until it finds the target or reaches the end."
+      },
+      {
+        "id": "c07",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "False is the Boolean value that represents a negative condition."
+      },
+      {
+        "id": "p02",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "Python uses input() to read a line from standard input."
+      },
+      {
+        "id": "p05",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "range(3) generates 0, 1, and 2."
+      },
+      {
+        "id": "p08",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "Python sequences use zero-based indexing."
+      },
+      {
+        "id": "c03",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "When x is 7, the comparison x > 5 evaluates to true."
+      }
+    ]
+  },
+  "round2": {
+    "passed": 0,
+    "total": 10,
+    "percent": 0,
+    "qualified": false
+  },
+  "round3": {
+    "problem_id": "r3_second_largest",
+    "mode": "submit",
+    "passed": 0,
+    "total": 8,
+    "percent": 0,
+    "elapsed_ms": 479,
+    "qualified": null,
+    "results": [
+      {
+        "test": 1,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      },
+      {
+        "test": 2,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      },
+      {
+        "test": 3,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      },
+      {
+        "test": 4,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      },
+      {
+        "test": 5,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      },
+      {
+        "test": 6,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      },
+      {
+        "test": 7,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      },
+      {
+        "test": 8,
+        "passed": false,
+        "runtime_error": false,
+        "timed_out": false,
+        "compile_error": false
+      }
+    ]
+  }
+}

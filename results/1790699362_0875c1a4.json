@@ -1,0 +1,109 @@
+{
+  "id": "1790699362_0875c1a4",
+  "saved_at": "2026-09-29 21:59:22",
+  "participant": "Ritesh R",
+  "college_id": "25BSR00446",
+  "language": "python",
+  "round1": {
+    "correct": 0,
+    "total": 12,
+    "percent": 0.0,
+    "qualified": false,
+    "review": [
+      {
+        "id": "py09",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Index -2 selects the second element from the end."
+      },
+      {
+        "id": "py16",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "2 + 4 + 6 equals 12."
+      },
+      {
+        "id": "py11",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "String repetition does not insert spaces."
+      },
+      {
+        "id": "py10",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "continue skips the remainder of the current loop iteration."
+      },
+      {
+        "id": "py07",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "import math imports the math module."
+      },
+      {
+        "id": "py13",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "The missing key causes get to return the default value 18."
+      },
+      {
+        "id": "py14",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "b defaults to 5, so the function returns 3 + 5."
+      },
+      {
+        "id": "py04",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "The equality comparison operator is ==."
+      },
+      {
+        "id": "py19",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "sorted returns a new list in ascending order."
+      },
+      {
+        "id": "py01",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "17 // 5 is 3."
+      },
+      {
+        "id": "py18",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "The trailing comma creates a one-element tuple."
+      },
+      {
+        "id": "py12",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "int(\"42\") returns the integer 42."
+      }
+    ]
+  },
+  "round2": {
+    "passed": 0,
+    "total": 5,
+    "percent": 0.0
+  },
+  "round3": {
+    "passed": 1,
+    "total": 15,
+    "percent": 6.67
+  }
+}

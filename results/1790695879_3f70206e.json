@@ -1,0 +1,109 @@
+{
+  "id": "1790695879_3f70206e",
+  "saved_at": "2026-09-29 21:01:19",
+  "participant": "Ritesh R",
+  "college_id": "25BSR00446",
+  "language": "cpp",
+  "round1": {
+    "correct": 1,
+    "total": 12,
+    "percent": 8.33,
+    "qualified": false,
+    "review": [
+      {
+        "id": "cpp04",
+        "correct": true,
+        "selected": 2,
+        "answer": 2,
+        "explanation": "x += 3 changes x from 7 to 10."
+      },
+      {
+        "id": "cpp07",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "const prevents ordinary modification of the declared variable."
+      },
+      {
+        "id": "cpp08",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "The remainder of 14 divided by 4 is 2."
+      },
+      {
+        "id": "cpp14",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "int* p declares p as a pointer to int."
+      },
+      {
+        "id": "cpp05",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "The iostream header declares the standard input and output stream objects."
+      },
+      {
+        "id": "cpp02",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "Integer division of 17 by 5 gives 3."
+      },
+      {
+        "id": "cpp03",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "The unary * operator dereferences a pointer."
+      },
+      {
+        "id": "cpp12",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "CODE contains four characters."
+      },
+      {
+        "id": "cpp11",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "&& is the logical AND operator."
+      },
+      {
+        "id": "cpp18",
+        "correct": false,
+        "selected": null,
+        "answer": 3,
+        "explanation": "A function with return type void returns no value."
+      },
+      {
+        "id": "cpp17",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "b is a reference to a, so assigning to b changes a to 9."
+      },
+      {
+        "id": "cpp20",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "Since a > b is false, the conditional expression selects b, which is 9."
+      }
+    ]
+  },
+  "round2": {
+    "passed": 0,
+    "total": 10,
+    "percent": 0.0
+  },
+  "round3": {
+    "passed": 2,
+    "total": 30,
+    "percent": 6.67
+  }
+}

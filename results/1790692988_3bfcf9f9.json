@@ -1,0 +1,109 @@
+{
+  "id": "1790692988_3bfcf9f9",
+  "saved_at": "2026-09-29 20:13:08",
+  "participant": "Ritesh R",
+  "college_id": "25BSR00446",
+  "language": "python",
+  "round1": {
+    "correct": 0,
+    "total": 12,
+    "percent": 0.0,
+    "qualified": false,
+    "review": [
+      {
+        "id": "c01",
+        "correct": false,
+        "selected": 0,
+        "answer": 1,
+        "explanation": "A queue removes items in the same order in which they were inserted."
+      },
+      {
+        "id": "p04",
+        "correct": false,
+        "selected": 2,
+        "answer": 3,
+        "explanation": "Assignment with = cannot be used as the equality comparison in an if condition; use ==."
+      },
+      {
+        "id": "c08",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "Programs should also be checked against boundary and special cases."
+      },
+      {
+        "id": "c03",
+        "correct": false,
+        "selected": null,
+        "answer": 2,
+        "explanation": "When x is 7, the comparison x > 5 evaluates to true."
+      },
+      {
+        "id": "c06",
+        "correct": false,
+        "selected": 2,
+        "answer": 0,
+        "explanation": "Linear search examines elements sequentially until it finds the target or reaches the end."
+      },
+      {
+        "id": "p03",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "The list contains three elements, so len(x) is 3."
+      },
+      {
+        "id": "p06",
+        "correct": false,
+        "selected": 0,
+        "answer": 1,
+        "explanation": "An even number has remainder 0 when divided by 2."
+      },
+      {
+        "id": "p02",
+        "correct": false,
+        "selected": 2,
+        "answer": 0,
+        "explanation": "Python uses input() to read a line from standard input."
+      },
+      {
+        "id": "c02",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "Loops repeat a block while a condition or iteration rule is satisfied."
+      },
+      {
+        "id": "c05",
+        "correct": false,
+        "selected": 1,
+        "answer": 0,
+        "explanation": "Debugging is the process of locating and correcting defects in a program."
+      },
+      {
+        "id": "c04",
+        "correct": false,
+        "selected": null,
+        "answer": 0,
+        "explanation": "A logical error allows execution but produces an incorrect result."
+      },
+      {
+        "id": "c07",
+        "correct": false,
+        "selected": null,
+        "answer": 1,
+        "explanation": "False is the Boolean value that represents a negative condition."
+      }
+    ]
+  },
+  "round2": {
+    "passed": 0,
+    "total": 10,
+    "percent": 0.0
+  },
+  "round3": {
+    "passed": 0,
+    "total": 8,
+    "percent": 0.0
+  }
+}
