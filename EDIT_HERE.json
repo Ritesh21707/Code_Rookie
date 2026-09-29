@@ -1,0 +1,1207 @@
+{
+  "branding": {
+    "title": "Code Rookie – 3 Round Mock Challenge",
+    "header_eyebrow": "BEGINNER CODING CHALLENGE",
+    "header_title": "Code Rookie",
+    "hero_badge": "3 ROUND MOCK",
+    "hero_title": "Practice the complete competition flow.",
+    "hero_description": "Round 1 tests coding aptitude and MCQs. Round 2 tests debugging and short problem solving. Round 3 evaluates your program against visible and hidden test cases.",
+    "admin_button": "Organizer Results",
+    "participant_label": "Participant name",
+    "college_id_label": "College ID / Roll No.",
+    "language_label": "Programming language",
+    "start_button": "Start Round 1",
+    "left_logo": "",
+    "right_logo": ""
+  },
+  "theme": {
+    "--bg": "#07110f",
+    "--panel": "#0d1916",
+    "--panel2": "#12211d",
+    "--text": "#edf7f3",
+    "--muted": "#96aaa2",
+    "--line": "#233832",
+    "--accent": "#6ee7b7",
+    "--accent2": "#34d399",
+    "--danger": "#fb7185",
+    "--warn": "#fbbf24",
+    "--ok": "#4ade80"
+  },
+  "settings": {
+    "round1_minutes": 12,
+    "round2_minutes": 25,
+    "round3_minutes": 30,
+    "round1_pass_percent": 60,
+    "round2_pass_percent": 60,
+    "round1_question_count": 12
+  },
+  "round1": {
+    "common": [],
+    "python": [
+      {
+        "id": "py01",
+        "type": "single",
+        "question": "What is the output?\n\nprint(17 // 5)",
+        "options": [
+          "3.4",
+          "3",
+          "2",
+          "4"
+        ],
+        "answer": 1,
+        "explanation": "17 // 5 is 3."
+      },
+      {
+        "id": "py02",
+        "type": "single",
+        "question": "Which of these is a mutable Python data type?",
+        "options": [
+          "tuple",
+          "str",
+          "list",
+          "int"
+        ],
+        "answer": 2,
+        "explanation": "Lists are mutable."
+      },
+      {
+        "id": "py03",
+        "type": "single",
+        "question": "What is the output?\n\nword = \"CODING\"\nprint(word[1:4])",
+        "options": [
+          "COD",
+          "DIN",
+          "ODIN",
+          "ODI"
+        ],
+        "answer": 3,
+        "explanation": "Indices 1, 2 and 3 contain ODI."
+      },
+      {
+        "id": "py04",
+        "type": "single",
+        "question": "Which operator checks whether two values are equal?",
+        "options": [
+          "==",
+          "=",
+          "!=",
+          ":="
+        ],
+        "answer": 0,
+        "explanation": "The equality comparison operator is ==."
+      },
+      {
+        "id": "py05",
+        "type": "single",
+        "question": "What is the output?\n\nnumbers = [4, 8]\nnumbers.append(12)\nprint(len(numbers))",
+        "options": [
+          "2",
+          "12",
+          "3",
+          "4"
+        ],
+        "answer": 2,
+        "explanation": "The list contains three elements after appending 12."
+      },
+      {
+        "id": "py06",
+        "type": "single",
+        "question": "What is the output?\n\nprint(2 + 3 * 4)",
+        "options": [
+          "20",
+          "14",
+          "24",
+          "9"
+        ],
+        "answer": 1,
+        "explanation": "Multiplication is evaluated first: 2 + 12 = 14."
+      },
+      {
+        "id": "py07",
+        "type": "single",
+        "question": "Which statement imports Python's math module?",
+        "options": [
+          "include math",
+          "using math",
+          "import math",
+          "require math"
+        ],
+        "answer": 2,
+        "explanation": "import math imports the math module."
+      },
+      {
+        "id": "py08",
+        "type": "single",
+        "question": "What is the output?\n\nprint(list(range(2, 9, 3)))",
+        "options": [
+          "[2, 5, 8]",
+          "[2, 5, 8, 9]",
+          "[3, 6, 9]",
+          "[2, 3, 9]"
+        ],
+        "answer": 0,
+        "explanation": "The range starts at 2 and advances by 3, stopping before 9."
+      },
+      {
+        "id": "py09",
+        "type": "single",
+        "question": "What is the output?\n\na = [10, 20, 30]\nprint(a[-2])",
+        "options": [
+          "10",
+          "30",
+          "Error",
+          "20"
+        ],
+        "answer": 3,
+        "explanation": "Index -2 selects the second element from the end."
+      },
+      {
+        "id": "py10",
+        "type": "single",
+        "question": "What does the continue statement do inside a loop?",
+        "options": [
+          "Ends the entire program",
+          "Skips the remaining statements in the current iteration",
+          "Exits the loop immediately",
+          "Restarts the program"
+        ],
+        "answer": 1,
+        "explanation": "continue skips the remainder of the current loop iteration."
+      },
+      {
+        "id": "py11",
+        "type": "single",
+        "question": "What is the output?\n\nprint(\"Hi\" * 3)",
+        "options": [
+          "Hi3",
+          "Hi Hi Hi",
+          "HiHiHi",
+          "Error"
+        ],
+        "answer": 2,
+        "explanation": "String repetition does not insert spaces."
+      },
+      {
+        "id": "py12",
+        "type": "single",
+        "question": "Which expression converts the string \"42\" into an integer?",
+        "options": [
+          "int(\"42\")",
+          "str(\"42\")",
+          "float(\"42\")",
+          "list(\"42\")"
+        ],
+        "answer": 0,
+        "explanation": "int(\"42\") returns the integer 42."
+      },
+      {
+        "id": "py13",
+        "type": "single",
+        "question": "What is the output?\n\nstudent = {\"name\": \"Asha\", \"score\": 8}\nprint(student.get(\"age\", 18))",
+        "options": [
+          "None",
+          "age",
+          "Error",
+          "18"
+        ],
+        "answer": 3,
+        "explanation": "The missing key causes get to return the default value 18."
+      },
+      {
+        "id": "py14",
+        "type": "single",
+        "question": "What is the output?\n\ndef add(a, b=5):\n    return a + b\n\nprint(add(3))",
+        "options": [
+          "3",
+          "8",
+          "5",
+          "Error"
+        ],
+        "answer": 1,
+        "explanation": "b defaults to 5, so the function returns 3 + 5."
+      },
+      {
+        "id": "py15",
+        "type": "single",
+        "question": "Which exception is raised by this code?\n\nnumbers = [1, 2]\nprint(numbers[5])",
+        "options": [
+          "KeyError",
+          "TypeError",
+          "IndexError",
+          "ValueError"
+        ],
+        "answer": 2,
+        "explanation": "Index 5 is outside the list's valid index range."
+      },
+      {
+        "id": "py16",
+        "type": "single",
+        "question": "What is the output?\n\ntotal = 0\nfor n in [2, 4, 6]:\n    total += n\nprint(total)",
+        "options": [
+          "12",
+          "6",
+          "10",
+          "3"
+        ],
+        "answer": 0,
+        "explanation": "2 + 4 + 6 equals 12."
+      },
+      {
+        "id": "py17",
+        "type": "single",
+        "question": "What is the output?\n\nprint(bool(0), bool(\"0\"))",
+        "options": [
+          "True True",
+          "False False",
+          "True False",
+          "False True"
+        ],
+        "answer": 3,
+        "explanation": "Numeric zero is false, but a non-empty string is true."
+      },
+      {
+        "id": "py18",
+        "type": "single",
+        "question": "Which expression creates a tuple containing exactly one element?",
+        "options": [
+          "(7)",
+          "(7,)",
+          "[7]",
+          "{7}"
+        ],
+        "answer": 1,
+        "explanation": "The trailing comma creates a one-element tuple."
+      },
+      {
+        "id": "py19",
+        "type": "single",
+        "question": "What is the output?\n\nvalues = [7, 2, 5]\nprint(sorted(values))",
+        "options": [
+          "[7, 5, 2]",
+          "[7, 2, 5]",
+          "[2, 5, 7]",
+          "None"
+        ],
+        "answer": 2,
+        "explanation": "sorted returns a new list in ascending order."
+      },
+      {
+        "id": "py20",
+        "type": "single",
+        "question": "What is the output?\n\na = [1, 2]\nb = a\nb.append(3)\nprint(a)",
+        "options": [
+          "[1, 2, 3]",
+          "[1, 2]",
+          "[3]",
+          "Error"
+        ],
+        "answer": 0,
+        "explanation": "a and b refer to the same list."
+      }
+    ],
+    "cpp": [
+      {
+        "id": "cpp01",
+        "type": "single",
+        "question": "Which statement prints Hello to the screen?",
+        "options": [
+          "cin >> \"Hello\";",
+          "cout << \"Hello\";",
+          "print(\"Hello\");",
+          "echo \"Hello\";"
+        ],
+        "answer": 1,
+        "explanation": "cout uses the insertion operator << to display output."
+      },
+      {
+        "id": "cpp02",
+        "type": "single",
+        "question": "What is the output?\n\nint a = 17, b = 5;\ncout << a / b;",
+        "options": [
+          "3.4",
+          "2",
+          "4",
+          "3"
+        ],
+        "answer": 3,
+        "explanation": "Integer division of 17 by 5 gives 3."
+      },
+      {
+        "id": "cpp03",
+        "type": "single",
+        "question": "Which operator is used to access the value pointed to by a pointer?",
+        "options": [
+          "*",
+          "&",
+          "%",
+          "::"
+        ],
+        "answer": 0,
+        "explanation": "The unary * operator dereferences a pointer."
+      },
+      {
+        "id": "cpp04",
+        "type": "single",
+        "question": "What is the output?\n\nint x = 7;\nx += 3;\ncout << x;",
+        "options": [
+          "7",
+          "3",
+          "10",
+          "21"
+        ],
+        "answer": 2,
+        "explanation": "x += 3 changes x from 7 to 10."
+      },
+      {
+        "id": "cpp05",
+        "type": "single",
+        "question": "Which header provides std::cout and std::cin?",
+        "options": [
+          "<string>",
+          "<iostream>",
+          "<vector>",
+          "<cmath>"
+        ],
+        "answer": 1,
+        "explanation": "The iostream header declares the standard input and output stream objects."
+      },
+      {
+        "id": "cpp06",
+        "type": "single",
+        "question": "What is the output?\n\nint numbers[] = {3, 6, 9, 12};\ncout << numbers[2];",
+        "options": [
+          "3",
+          "6",
+          "12",
+          "9"
+        ],
+        "answer": 3,
+        "explanation": "Array indexing starts at 0, so index 2 contains 9."
+      },
+      {
+        "id": "cpp07",
+        "type": "single",
+        "question": "Which keyword makes a variable read-only after initialization?",
+        "options": [
+          "const",
+          "static",
+          "public",
+          "mutable"
+        ],
+        "answer": 0,
+        "explanation": "const prevents ordinary modification of the declared variable."
+      },
+      {
+        "id": "cpp08",
+        "type": "single",
+        "question": "What is the output?\n\ncout << 14 % 4;",
+        "options": [
+          "3",
+          "3.5",
+          "2",
+          "4"
+        ],
+        "answer": 2,
+        "explanation": "The remainder of 14 divided by 4 is 2."
+      },
+      {
+        "id": "cpp09",
+        "type": "single",
+        "question": "Which loop always executes its body at least once when reached?",
+        "options": [
+          "for",
+          "do-while",
+          "while",
+          "range-based for"
+        ],
+        "answer": 1,
+        "explanation": "A do-while loop checks its condition after executing its body."
+      },
+      {
+        "id": "cpp10",
+        "type": "single",
+        "question": "What is the output?\n\nint total = 0;\nfor (int i = 1; i <= 4; i++) {\n    total += i;\n}\ncout << total;",
+        "options": [
+          "4",
+          "6",
+          "15",
+          "10"
+        ],
+        "answer": 3,
+        "explanation": "The loop adds 1 + 2 + 3 + 4, giving 10."
+      },
+      {
+        "id": "cpp11",
+        "type": "single",
+        "question": "Which operator represents logical AND?",
+        "options": [
+          "&&",
+          "||",
+          "!",
+          "&"
+        ],
+        "answer": 0,
+        "explanation": "&& is the logical AND operator."
+      },
+      {
+        "id": "cpp12",
+        "type": "single",
+        "question": "What is the output?\n\nstring word = \"CODE\";\ncout << word.length();",
+        "options": [
+          "3",
+          "5",
+          "4",
+          "0"
+        ],
+        "answer": 2,
+        "explanation": "CODE contains four characters."
+      },
+      {
+        "id": "cpp13",
+        "type": "single",
+        "question": "What is the output?\n\nint x = 5;\ncout << ++x;",
+        "options": [
+          "5",
+          "6",
+          "4",
+          "Error"
+        ],
+        "answer": 1,
+        "explanation": "Pre-increment increases x to 6 before its value is printed."
+      },
+      {
+        "id": "cpp14",
+        "type": "single",
+        "question": "Which statement correctly declares a pointer to an integer?",
+        "options": [
+          "pointer int p;",
+          "int p*;",
+          "*int p;",
+          "int* p;"
+        ],
+        "answer": 3,
+        "explanation": "int* p declares p as a pointer to int."
+      },
+      {
+        "id": "cpp15",
+        "type": "single",
+        "question": "What is the output?\n\nint x = 8;\nif (x % 2 == 0) {\n    cout << \"Even\";\n} else {\n    cout << \"Odd\";\n}",
+        "options": [
+          "Even",
+          "Odd",
+          "0",
+          "Error"
+        ],
+        "answer": 0,
+        "explanation": "8 is divisible by 2, so Even is printed."
+      },
+      {
+        "id": "cpp16",
+        "type": "single",
+        "question": "Which keyword exits the nearest enclosing loop or switch statement?",
+        "options": [
+          "continue",
+          "skip",
+          "break",
+          "stop"
+        ],
+        "answer": 2,
+        "explanation": "break exits the nearest enclosing loop or switch."
+      },
+      {
+        "id": "cpp17",
+        "type": "single",
+        "question": "What is the output?\n\nint a = 5;\nint& b = a;\nb = 9;\ncout << a;",
+        "options": [
+          "5",
+          "9",
+          "0",
+          "Error"
+        ],
+        "answer": 1,
+        "explanation": "b is a reference to a, so assigning to b changes a to 9."
+      },
+      {
+        "id": "cpp18",
+        "type": "single",
+        "question": "Which return type indicates that a function returns no value?",
+        "options": [
+          "null",
+          "empty",
+          "int",
+          "void"
+        ],
+        "answer": 3,
+        "explanation": "A function with return type void returns no value."
+      },
+      {
+        "id": "cpp19",
+        "type": "single",
+        "question": "What is the output?\n\nint x = 3;\nwhile (x > 0) {\n    cout << x;\n    x--;\n}",
+        "options": [
+          "321",
+          "123",
+          "320",
+          "3210"
+        ],
+        "answer": 0,
+        "explanation": "The loop prints 3, 2 and 1 without spaces."
+      },
+      {
+        "id": "cpp20",
+        "type": "single",
+        "question": "What is the output?\n\nint a = 4, b = 9;\ncout << (a > b ? a : b);",
+        "options": [
+          "4",
+          "1",
+          "9",
+          "0"
+        ],
+        "answer": 2,
+        "explanation": "Since a > b is false, the conditional expression selects b, which is 9."
+      }
+    ]
+  },
+  "problems": {
+    "r2_py_py001": {
+      "round": 2,
+      "language": "python",
+      "title": "PY001 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Find the second largest distinct number in the list. Duplicate values should not affect the result.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Second Largest: 30",
+      "samples": [
+        {
+          "input": "",
+          "output": "Second Largest: 30\n"
+        }
+      ],
+      "starter": {
+        "python": "numbers = [10, 40, 20, 40, 30]\nnumbers.sort()\nprint(\"Second Largest:\", numbers[-2])",
+        "cpp": "numbers = [10, 40, 20, 40, 30]\nnumbers.sort()\nprint(\"Second Largest:\", numbers[-2])"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Second Largest: 30"
+        }
+      ],
+      "corrected_code": "numbers = [10, 40, 20, 40, 30]\nunique_numbers = sorted(set(numbers))\nprint(\"Second Largest:\", unique_numbers[-2])",
+      "answer_explanation": "The list contains duplicate values. The program must remove duplicates before finding the second largest number."
+    },
+    "r2_py_py002": {
+      "round": 2,
+      "language": "python",
+      "title": "PY002 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Remove all even numbers from the list while keeping the remaining numbers in their original order.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: [7, 9]",
+      "samples": [
+        {
+          "input": "",
+          "output": "[7, 9]\n"
+        }
+      ],
+      "starter": {
+        "python": "numbers = [2, 4, 6, 7, 8, 9]\nfor n in numbers:\n    if n % 2 == 0:\n        numbers.remove(n)\nprint(numbers)",
+        "cpp": "numbers = [2, 4, 6, 7, 8, 9]\nfor n in numbers:\n    if n % 2 == 0:\n        numbers.remove(n)\nprint(numbers)"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "[7, 9]"
+        }
+      ],
+      "corrected_code": "numbers = [2, 4, 6, 7, 8, 9]\nnumbers = [n for n in numbers if n % 2 != 0]\nprint(numbers)",
+      "answer_explanation": "Removing elements from a list while iterating over the same list can skip elements. A list comprehension creates the required filtered list safely."
+    },
+    "r2_py_py003": {
+      "round": 2,
+      "language": "python",
+      "title": "PY003 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to count the number of vowels in the given string.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Vowels: 3",
+      "samples": [
+        {
+          "input": "",
+          "output": "Vowels: 3\n"
+        }
+      ],
+      "starter": {
+        "python": "text = \"programming\"\nvowels = \"aeiou\"\ncount = 0\n\nfor char in text:\n    if char in vowels:\n        count =+ 1\n\nprint(\"Vowels:\", count)",
+        "cpp": "text = \"programming\"\nvowels = \"aeiou\"\ncount = 0\n\nfor char in text:\n    if char in vowels:\n        count =+ 1\n\nprint(\"Vowels:\", count)"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Vowels: 3"
+        }
+      ],
+      "corrected_code": "text = \"programming\"\nvowels = \"aeiou\"\ncount = 0\n\nfor char in text:\n    if char in vowels:\n        count += 1\n\nprint(\"Vowels:\", count)",
+      "answer_explanation": "The operator =+ assigns positive 1 instead of incrementing the existing value. The correct increment operator is +=."
+    },
+    "r2_py_py004": {
+      "round": 2,
+      "language": "python",
+      "title": "PY004 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to calculate the factorial of a number using a loop.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Factorial: 120",
+      "samples": [
+        {
+          "input": "",
+          "output": "Factorial: 120\n"
+        }
+      ],
+      "starter": {
+        "python": "number = 5\nfactorial = 0\n\nfor i in range(1, number + 1):\n    factorial *= i\n\nprint(\"Factorial:\", factorial)",
+        "cpp": "number = 5\nfactorial = 0\n\nfor i in range(1, number + 1):\n    factorial *= i\n\nprint(\"Factorial:\", factorial)"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Factorial: 120"
+        }
+      ],
+      "corrected_code": "number = 5\nfactorial = 1\n\nfor i in range(1, number + 1):\n    factorial *= i\n\nprint(\"Factorial:\", factorial)",
+      "answer_explanation": "Factorial multiplication must start with 1. Starting with 0 makes every multiplication result 0."
+    },
+    "r2_py_py005": {
+      "round": 2,
+      "language": "python",
+      "title": "PY005 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to check whether the given string is a palindrome.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Palindrome",
+      "samples": [
+        {
+          "input": "",
+          "output": "Palindrome\n"
+        }
+      ],
+      "starter": {
+        "python": "text = \"madam\"\nreversed_text = text.reverse()\n\nif text == reversed_text:\n    print(\"Palindrome\")\nelse:\n    print(\"Not Palindrome\")",
+        "cpp": "text = \"madam\"\nreversed_text = text.reverse()\n\nif text == reversed_text:\n    print(\"Palindrome\")\nelse:\n    print(\"Not Palindrome\")"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Palindrome"
+        }
+      ],
+      "corrected_code": "text = \"madam\"\nreversed_text = text[::-1]\n\nif text == reversed_text:\n    print(\"Palindrome\")\nelse:\n    print(\"Not Palindrome\")",
+      "answer_explanation": "Python strings do not have a reverse() method. String slicing with [::-1] can be used to reverse a string."
+    },
+    "r2_cpp_cpp001": {
+      "round": 2,
+      "language": "cpp",
+      "title": "CPP001 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to find the largest number in the array.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Largest: 40",
+      "samples": [
+        {
+          "input": "",
+          "output": "Largest: 40\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {10, 25, 7, 40, 18};\n    int largest = 0;\n\n    for (int i = 0; i < 5; i++) {\n        if (numbers[i] < largest) {\n            largest = numbers[i];\n        }\n    }\n\n    cout << \"Largest: \" << largest;\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {10, 25, 7, 40, 18};\n    int largest = 0;\n\n    for (int i = 0; i < 5; i++) {\n        if (numbers[i] < largest) {\n            largest = numbers[i];\n        }\n    }\n\n    cout << \"Largest: \" << largest;\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Largest: 40"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {10, 25, 7, 40, 18};\n    int largest = numbers[0];\n\n    for (int i = 1; i < 5; i++) {\n        if (numbers[i] > largest) {\n            largest = numbers[i];\n        }\n    }\n\n    cout << \"Largest: \" << largest;\n    return 0;\n}",
+      "answer_explanation": "The comparison operator is reversed. The program should update largest when the current number is greater than largest. Initializing largest with the first array element also handles arrays containing negative numbers."
+    },
+    "r2_cpp_cpp002": {
+      "round": 2,
+      "language": "cpp",
+      "title": "CPP002 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to calculate the sum of all elements in the array.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Sum: 50",
+      "samples": [
+        {
+          "input": "",
+          "output": "Sum: 50\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {5, 10, 15, 20};\n    int sum = 0;\n\n    for (int i = 0; i <= 4; i++) {\n        sum += numbers[i];\n    }\n\n    cout << \"Sum: \" << sum;\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {5, 10, 15, 20};\n    int sum = 0;\n\n    for (int i = 0; i <= 4; i++) {\n        sum += numbers[i];\n    }\n\n    cout << \"Sum: \" << sum;\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Sum: 50"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {5, 10, 15, 20};\n    int sum = 0;\n\n    for (int i = 0; i < 4; i++) {\n        sum += numbers[i];\n    }\n\n    cout << \"Sum: \" << sum;\n    return 0;\n}",
+      "answer_explanation": "The array has four elements with indexes 0 to 3. Using <= 4 accesses index 4, which is outside the array."
+    },
+    "r2_cpp_cpp003": {
+      "round": 2,
+      "language": "cpp",
+      "title": "CPP003 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to count how many even numbers are present in the array.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Even Numbers: 3",
+      "samples": [
+        {
+          "input": "",
+          "output": "Even Numbers: 3\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {2, 5, 8, 11, 14};\n    int count = 0;\n\n    for (int i = 0; i < 5; i++) {\n        if (numbers[i] % 2 = 0) {\n            count++;\n        }\n    }\n\n    cout << \"Even Numbers: \" << count;\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {2, 5, 8, 11, 14};\n    int count = 0;\n\n    for (int i = 0; i < 5; i++) {\n        if (numbers[i] % 2 = 0) {\n            count++;\n        }\n    }\n\n    cout << \"Even Numbers: \" << count;\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Even Numbers: 3"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {2, 5, 8, 11, 14};\n    int count = 0;\n\n    for (int i = 0; i < 5; i++) {\n        if (numbers[i] % 2 == 0) {\n            count++;\n        }\n    }\n\n    cout << \"Even Numbers: \" << count;\n    return 0;\n}",
+      "answer_explanation": "The condition uses the assignment operator = instead of the equality comparison operator ==. The remainder must be compared with zero."
+    },
+    "r2_cpp_cpp004": {
+      "round": 2,
+      "language": "cpp",
+      "title": "CPP004 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to calculate the factorial of a number.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: Factorial: 120",
+      "samples": [
+        {
+          "input": "",
+          "output": "Factorial: 120\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number = 5;\n    int factorial = 0;\n\n    for (int i = 1; i <= number; i++) {\n        factorial *= i;\n    }\n\n    cout << \"Factorial: \" << factorial;\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number = 5;\n    int factorial = 0;\n\n    for (int i = 1; i <= number; i++) {\n        factorial *= i;\n    }\n\n    cout << \"Factorial: \" << factorial;\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "Factorial: 120"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number = 5;\n    int factorial = 1;\n\n    for (int i = 1; i <= number; i++) {\n        factorial *= i;\n    }\n\n    cout << \"Factorial: \" << factorial;\n    return 0;\n}",
+      "answer_explanation": "The factorial calculation uses multiplication, so the initial value must be 1. Starting with 0 always produces 0."
+    },
+    "r2_cpp_cpp005": {
+      "round": 2,
+      "language": "cpp",
+      "title": "CPP005 – Debugging Challenge",
+      "kind": "debugging",
+      "statement": "Correct the program to reverse the given array and print the reversed elements.",
+      "input_format": "No additional input is required unless shown in the starter code.",
+      "output_format": "Expected output: 5 4 3 2 1",
+      "samples": [
+        {
+          "input": "",
+          "output": "5 4 3 2 1\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {1, 2, 3, 4, 5};\n    int size = 5;\n\n    for (int i = 0; i < size; i++) {\n        cout << numbers[size + i] << \" \";\n    }\n\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {1, 2, 3, 4, 5};\n    int size = 5;\n\n    for (int i = 0; i < size; i++) {\n        cout << numbers[size + i] << \" \";\n    }\n\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "",
+          "expected": "5 4 3 2 1"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int numbers[] = {1, 2, 3, 4, 5};\n    int size = 5;\n\n    for (int i = size - 1; i >= 0; i--) {\n        cout << numbers[i] << \" \";\n    }\n\n    return 0;\n}",
+      "answer_explanation": "The original code accesses indexes beyond the array. To print the array in reverse, start at the last valid index, size - 1, and decrease the index until 0."
+    },
+    "r3_py_py001": {
+      "round": 3,
+      "language": "python",
+      "title": "Even or Odd",
+      "kind": "test-case challenge",
+      "statement": "Write a program to check whether a given integer is even or odd.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Easy",
+      "marks": 10,
+      "samples": [
+        {
+          "input": "24\n",
+          "output": "Even\n"
+        }
+      ],
+      "starter": {
+        "python": "number = int(input())\n\nif number % 2 = 0:\n    print(\"Even\")\nelse:\n    print(\"Odd\")",
+        "cpp": "number = int(input())\n\nif number % 2 = 0:\n    print(\"Even\")\nelse:\n    print(\"Odd\")"
+      },
+      "tests": [
+        {
+          "input": "24",
+          "expected": "Even"
+        },
+        {
+          "input": "17",
+          "expected": "Odd"
+        },
+        {
+          "input": "0",
+          "expected": "Even"
+        }
+      ],
+      "corrected_code": "number = int(input())\n\nif number % 2 == 0:\n    print(\"Even\")\nelse:\n    print(\"Odd\")",
+      "answer_explanation": "The comparison operator is incorrect. Python uses == to compare two values, while = is used for assignment."
+    },
+    "r3_py_py002": {
+      "round": 3,
+      "language": "python",
+      "title": "Largest of Three Numbers",
+      "kind": "test-case challenge",
+      "statement": "Write a program to find the largest among three integers.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Easy",
+      "marks": 10,
+      "samples": [
+        {
+          "input": "10 25 15\n",
+          "output": "25\n"
+        }
+      ],
+      "starter": {
+        "python": "a, b, c = map(int, input().split())\n\nlargest = a\n\nif b < largest:\n    largest = b\n\nif c < largest:\n    largest = c\n\nprint(largest)",
+        "cpp": "a, b, c = map(int, input().split())\n\nlargest = a\n\nif b < largest:\n    largest = b\n\nif c < largest:\n    largest = c\n\nprint(largest)"
+      },
+      "tests": [
+        {
+          "input": "10 25 15",
+          "expected": "25"
+        },
+        {
+          "input": "50 30 40",
+          "expected": "50"
+        },
+        {
+          "input": "7 7 5",
+          "expected": "7"
+        }
+      ],
+      "corrected_code": "a, b, c = map(int, input().split())\n\nlargest = a\n\nif b > largest:\n    largest = b\n\nif c > largest:\n    largest = c\n\nprint(largest)",
+      "answer_explanation": "The program incorrectly checks whether b and c are smaller than the current largest value. To find the largest value, each number must be compared using >."
+    },
+    "r3_py_py003": {
+      "round": 3,
+      "language": "python",
+      "title": "Sum of Digits",
+      "kind": "test-case challenge",
+      "statement": "Write a program to find the sum of the digits of a given positive integer.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Easy",
+      "marks": 10,
+      "samples": [
+        {
+          "input": "1234\n",
+          "output": "10\n"
+        }
+      ],
+      "starter": {
+        "python": "number = int(input())\nsum_digits = 0\n\nwhile number > 0:\n    digit = number % 10\n    sum_digits = digit\n    number = number // 10\n\nprint(sum_digits)",
+        "cpp": "number = int(input())\nsum_digits = 0\n\nwhile number > 0:\n    digit = number % 10\n    sum_digits = digit\n    number = number // 10\n\nprint(sum_digits)"
+      },
+      "tests": [
+        {
+          "input": "1234",
+          "expected": "10"
+        },
+        {
+          "input": "505",
+          "expected": "10"
+        },
+        {
+          "input": "9",
+          "expected": "9"
+        }
+      ],
+      "corrected_code": "number = int(input())\nsum_digits = 0\n\nwhile number > 0:\n    digit = number % 10\n    sum_digits += digit\n    number = number // 10\n\nprint(sum_digits)",
+      "answer_explanation": "The program replaces sum_digits with every digit instead of adding each digit to the existing sum. The += operator is required."
+    },
+    "r3_py_py004": {
+      "round": 3,
+      "language": "python",
+      "title": "Second Largest Distinct Number",
+      "kind": "test-case challenge",
+      "statement": "Given an array of N integers, find the second largest distinct number. If a second largest distinct number does not exist, print -1.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "samples": [
+        {
+          "input": "6\n10 20 40 30 40 15\n",
+          "output": "30\n"
+        }
+      ],
+      "starter": {
+        "python": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nnumbers.sort(reverse=True)\n\nif n < 2:\n    print(-1)\nelse:\n    print(numbers[1])",
+        "cpp": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nnumbers.sort(reverse=True)\n\nif n < 2:\n    print(-1)\nelse:\n    print(numbers[1])"
+      },
+      "tests": [
+        {
+          "input": "6\n10 20 40 30 40 15",
+          "expected": "30"
+        },
+        {
+          "input": "5\n7 7 7 7 7",
+          "expected": "-1"
+        },
+        {
+          "input": "6\n-10 -5 -3 -3 -8 -6",
+          "expected": "-5"
+        }
+      ],
+      "corrected_code": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nunique_numbers = sorted(set(numbers), reverse=True)\n\nif len(unique_numbers) < 2:\n    print(-1)\nelse:\n    print(unique_numbers[1])",
+      "answer_explanation": "The second largest value must be distinct. Sorting the original array and selecting index 1 fails when the largest value occurs more than once. Duplicate values must be removed before selecting the second largest value."
+    },
+    "r3_py_py005": {
+      "round": 3,
+      "language": "python",
+      "title": "First Non-Repeating Character",
+      "kind": "test-case challenge",
+      "statement": "Given a string, find the first character that appears exactly once. If every character is repeated, print -1.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "samples": [
+        {
+          "input": "swiss\n",
+          "output": "w\n"
+        }
+      ],
+      "starter": {
+        "python": "text = input()\n\nfor char in text:\n    if text.count(char) > 1:\n        print(char)\n        break\nelse:\n    print(-1)",
+        "cpp": "text = input()\n\nfor char in text:\n    if text.count(char) > 1:\n        print(char)\n        break\nelse:\n    print(-1)"
+      },
+      "tests": [
+        {
+          "input": "swiss",
+          "expected": "w"
+        },
+        {
+          "input": "aabbcc",
+          "expected": "-1"
+        },
+        {
+          "input": "programming",
+          "expected": "p"
+        }
+      ],
+      "corrected_code": "text = input()\n\nfor char in text:\n    if text.count(char) == 1:\n        print(char)\n        break\nelse:\n    print(-1)",
+      "answer_explanation": "The program currently selects the first character that appears more than once. The requirement is to find the first character whose frequency is exactly one."
+    },
+    "r3_cpp_cpp001": {
+      "round": 3,
+      "language": "cpp",
+      "title": "Even or Odd",
+      "kind": "test-case challenge",
+      "statement": "Write a program to check whether a given integer is even or odd.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Easy",
+      "marks": 10,
+      "samples": [
+        {
+          "input": "24\n",
+          "output": "Even\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    if (number % 2 = 0) {\n        cout << \"Even\";\n    } else {\n        cout << \"Odd\";\n    }\n\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    if (number % 2 = 0) {\n        cout << \"Even\";\n    } else {\n        cout << \"Odd\";\n    }\n\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "24",
+          "expected": "Even"
+        },
+        {
+          "input": "17",
+          "expected": "Odd"
+        },
+        {
+          "input": "0",
+          "expected": "Even"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    if (number % 2 == 0) {\n        cout << \"Even\";\n    } else {\n        cout << \"Odd\";\n    }\n\n    return 0;\n}",
+      "answer_explanation": "The condition incorrectly uses the assignment operator =. The equality comparison operator == must be used to check whether the remainder is zero."
+    },
+    "r3_cpp_cpp002": {
+      "round": 3,
+      "language": "cpp",
+      "title": "Largest of Three Numbers",
+      "kind": "test-case challenge",
+      "statement": "Write a program to find the largest among three integers.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Easy",
+      "marks": 10,
+      "samples": [
+        {
+          "input": "10 25 15\n",
+          "output": "25\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n\n    int largest = a;\n\n    if (b < largest) {\n        largest = b;\n    }\n\n    if (c < largest) {\n        largest = c;\n    }\n\n    cout << largest;\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n\n    int largest = a;\n\n    if (b < largest) {\n        largest = b;\n    }\n\n    if (c < largest) {\n        largest = c;\n    }\n\n    cout << largest;\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "10 25 15",
+          "expected": "25"
+        },
+        {
+          "input": "50 30 40",
+          "expected": "50"
+        },
+        {
+          "input": "7 7 5",
+          "expected": "7"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n\n    int largest = a;\n\n    if (b > largest) {\n        largest = b;\n    }\n\n    if (c > largest) {\n        largest = c;\n    }\n\n    cout << largest;\n    return 0;\n}",
+      "answer_explanation": "The comparisons are reversed. To find the largest value, b and c must replace largest only when they are greater than the current largest value."
+    },
+    "r3_cpp_cpp003": {
+      "round": 3,
+      "language": "cpp",
+      "title": "Sum of Digits",
+      "kind": "test-case challenge",
+      "statement": "Write a program to find the sum of the digits of a given positive integer.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Easy",
+      "marks": 10,
+      "samples": [
+        {
+          "input": "1234\n",
+          "output": "10\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    int sum = 0;\n\n    while (number > 0) {\n        int digit = number % 10;\n        sum = digit;\n        number = number / 10;\n    }\n\n    cout << sum;\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    int sum = 0;\n\n    while (number > 0) {\n        int digit = number % 10;\n        sum = digit;\n        number = number / 10;\n    }\n\n    cout << sum;\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "1234",
+          "expected": "10"
+        },
+        {
+          "input": "505",
+          "expected": "10"
+        },
+        {
+          "input": "9",
+          "expected": "9"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    int sum = 0;\n\n    while (number > 0) {\n        int digit = number % 10;\n        sum += digit;\n        number = number / 10;\n    }\n\n    cout << sum;\n    return 0;\n}",
+      "answer_explanation": "The program overwrites sum with each digit. It must add each extracted digit to the existing sum using +=."
+    },
+    "r3_cpp_cpp004": {
+      "round": 3,
+      "language": "cpp",
+      "title": "Second Largest Distinct Number",
+      "kind": "test-case challenge",
+      "statement": "Given an array of N integers, find the second largest distinct number. If a second largest distinct number does not exist, print -1.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "samples": [
+        {
+          "input": "6\n10 20 40 30 40 15\n",
+          "output": "30\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    int numbers[100];\n    for (int i = 0; i < n; i++) {\n        cin >> numbers[i];\n    }\n\n    sort(numbers, numbers + n, greater<int>());\n\n    if (n < 2) {\n        cout << -1;\n    } else {\n        cout << numbers[1];\n    }\n\n    return 0;\n}",
+        "cpp": "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    int numbers[100];\n    for (int i = 0; i < n; i++) {\n        cin >> numbers[i];\n    }\n\n    sort(numbers, numbers + n, greater<int>());\n\n    if (n < 2) {\n        cout << -1;\n    } else {\n        cout << numbers[1];\n    }\n\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "6\n10 20 40 30 40 15",
+          "expected": "30"
+        },
+        {
+          "input": "5\n7 7 7 7 7",
+          "expected": "-1"
+        },
+        {
+          "input": "6\n-10 -5 -3 -3 -8 -6",
+          "expected": "-5"
+        }
+      ],
+      "corrected_code": "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    int numbers[100];\n    for (int i = 0; i < n; i++) {\n        cin >> numbers[i];\n    }\n\n    sort(numbers, numbers + n, greater<int>());\n\n    int largest = numbers[0];\n    bool found = false;\n    int secondLargest = -1;\n\n    for (int i = 1; i < n; i++) {\n        if (numbers[i] != largest) {\n            secondLargest = numbers[i];\n            found = true;\n            break;\n        }\n    }\n\n    if (found) {\n        cout << secondLargest;\n    } else {\n        cout << -1;\n    }\n\n    return 0;\n}",
+      "answer_explanation": "The second element after sorting is not necessarily the second largest distinct number because the largest value may appear multiple times. The program must skip duplicate occurrences of the largest value."
+    },
+    "r3_cpp_cpp005": {
+      "round": 3,
+      "language": "cpp",
+      "title": "First Non-Repeating Character",
+      "kind": "test-case challenge",
+      "statement": "Given a string, find the first character that appears exactly once. If every character is repeated, print -1.",
+      "input_format": "Use the input format demonstrated by the test cases.",
+      "output_format": "Print exactly the required result.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "samples": [
+        {
+          "input": "swiss\n",
+          "output": "w\n"
+        }
+      ],
+      "starter": {
+        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    string text;\n    cin >> text;\n\n    for (int i = 0; i < text.length(); i++) {\n        int count = 0;\n\n        for (int j = 0; j < text.length(); j++) {\n            if (text[i] != text[j]) {\n                count++;\n            }\n        }\n\n        if (count == 1) {\n            cout << text[i];\n            return 0;\n        }\n    }\n\n    cout << -1;\n    return 0;\n}",
+        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    string text;\n    cin >> text;\n\n    for (int i = 0; i < text.length(); i++) {\n        int count = 0;\n\n        for (int j = 0; j < text.length(); j++) {\n            if (text[i] != text[j]) {\n                count++;\n            }\n        }\n\n        if (count == 1) {\n            cout << text[i];\n            return 0;\n        }\n    }\n\n    cout << -1;\n    return 0;\n}"
+      },
+      "tests": [
+        {
+          "input": "swiss",
+          "expected": "w"
+        },
+        {
+          "input": "aabbcc",
+          "expected": "-1"
+        },
+        {
+          "input": "programming",
+          "expected": "p"
+        }
+      ],
+      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    string text;\n    cin >> text;\n\n    for (int i = 0; i < text.length(); i++) {\n        int count = 0;\n\n        for (int j = 0; j < text.length(); j++) {\n            if (text[i] == text[j]) {\n                count++;\n            }\n        }\n\n        if (count == 1) {\n            cout << text[i];\n            return 0;\n        }\n    }\n\n    cout << -1;\n    return 0;\n}",
+      "answer_explanation": "The inner loop incorrectly increments count when characters are different. It should count occurrences of the same character using ==. A character is non-repeating when its count is exactly one."
+    }
+  }
+}
