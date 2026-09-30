@@ -1,956 +1,490 @@
 'use strict';
 
-
-
 const $ = (selector, root = document) => root.querySelector(selector);
-
-const $$ = (selector, root = document) =>
-
-  [...root.querySelectorAll(selector)];
-
-
+const $$ = (selector, root = document) => [
+  ...root.querySelectorAll(selector)
+];
 
 const state = {
-
   config: null,
-
   capabilities: null,
-
   participant: '',
-
   collegeId: '',
-
   language: 'python',
-
   round: 0,
-
   timerId: null,
-
   secondsLeft: 0,
-
   round1Token: null,
-
   round1Questions: [],
-
   round1Result: null,
-
   round2Problems: [],
-
   round3Problems: [],
-
   editorCache: {},
-
   completed: false,
-
 };
-
-
 
 const privateReceipts = {
-
   2: {},
-
   3: {},
-
 };
 
-
-
 let adminPassword = '';
-
 let busy = false;
-
 let loadingRound = false;
-
 let tabResetTriggered = false;
-
 
 
 // ---------- General helpers ----------
 
-
-
 async function api(path, options = {}) {
-
   const response = await fetch(path, {
-
     ...options,
-
     cache: 'no-store',
-
     headers: {
-
       'Content-Type': 'application/json',
-
       ...(options.headers || {}),
-
     },
-
   });
-
-
 
   const type = response.headers.get('content-type') || '';
-
   const data = type.includes('application/json')
-
     ? await response.json()
-
     : await response.text();
 
-
-
   // Ignore old requests while a tab-switch reset is navigating away.
-
   if (tabResetTriggered) return new Promise(() => {});
 
-
-
   if (!response.ok) {
-
     throw new Error(data.error || data || `HTTP ${response.status}`);
-
   }
-
-
 
   return data;
-
 }
-
-
 
 function escapeHtml(value) {
-
   return String(value ?? '').replace(/[&<>'"]/g, character => ({
-
     '&': '&amp;',
-
     '<': '&lt;',
-
     '>': '&gt;',
-
     "'": '&#39;',
-
     '"': '&quot;',
-
   }[character]));
-
 }
-
-
 
 function toast(message, kind = '') {
-
   const element = document.createElement('div');
-
   element.className = `toast ${kind}`;
-
   element.textContent = message;
-
   document.body.appendChild(element);
-
   setTimeout(() => element.remove(), 5000);
-
 }
-
-
 
 function isQuizActive() {
-
   return state.round >= 1 && state.round <= 3;
-
 }
-
-
 
 function updateAdminButton() {
-
   const button = $('#adminBtn');
-
   const visible = location.hash === '#admin' && !isQuizActive();
-
   button.hidden = !visible;
-
   button.style.display = visible ? '' : 'none';
-
 }
-
-
 
 function setSteps(round) {
-
   $$('.step').forEach((element, index) => {
-
     const number = index + 1;
-
     element.classList.toggle('active', number === round);
-
     element.classList.toggle('done', number < round);
-
   });
-
 }
-
-
 
 function stopTimer() {
-
   clearInterval(state.timerId);
-
   state.timerId = null;
-
 }
-
-
 
 function startTimer(minutes, onExpire) {
-
   stopTimer();
 
-
-
   const duration = Math.max(1, Number(minutes) || 1) * 60;
-
   const deadline = Date.now() + duration * 1000;
 
-
-
   const update = () => {
-
     state.secondsLeft = Math.max(
-
       0,
-
       Math.ceil((deadline - Date.now()) / 1000)
-
     );
-
-
 
     const minutesLeft = Math.floor(state.secondsLeft / 60);
-
     const seconds = state.secondsLeft % 60;
 
-
-
     $('#timer').textContent =
-
       `${String(minutesLeft).padStart(2, '0')}:` +
-
       `${String(seconds).padStart(2, '0')}`;
 
-
-
     $('#timer').style.color =
-
       state.secondsLeft <= 60 ? 'var(--warn)' : '';
 
-
-
     if (state.secondsLeft === 0) {
-
       stopTimer();
-
       onExpire();
-
     }
-
   };
 
-
-
   state.timerId = setInterval(update, 250);
-
   update();
-
 }
-
-
 
 function requireReceipt(result) {
-
   if (!result || typeof result.receipt !== 'string') {
-
     throw new Error(
-
       'The server is using the old grading code. ' +
-
       'Ask the organizer to update app.py and restart it.'
-
     );
-
   }
-
-
 
   return result.receipt;
-
 }
-
-
 
 function editorKey(problemId) {
-
   return `${problemId}:${state.language}`;
-
 }
-
-
 
 function saveCurrentEditor() {
-
   const editor = $('#codeEditor');
 
-
-
   if (editor?.dataset.problem) {
-
     state.editorCache[editorKey(editor.dataset.problem)] = editor.value;
-
   }
-
 }
-
 
 
 // ---------- Branding and startup ----------
 
-
-
 function applyEditableBranding(config) {
-
   const branding = config.branding || {};
 
-
-
   for (const [name, value] of Object.entries(config.theme || {})) {
-
     if (name.startsWith('--') && typeof value === 'string') {
-
       document.documentElement.style.setProperty(name, value);
-
     }
-
   }
-
-
 
   document.title = branding.title || config.title || document.title;
 
-
-
   const labels = {
-
     '#brandEyebrow': branding.header_eyebrow,
-
     '#brandTitle': branding.header_title,
-
     '#heroBadge': branding.hero_badge,
-
     '#heroTitle': branding.hero_title,
-
     '#heroDescription': branding.hero_description,
-
     '#participantLabel': branding.participant_label,
-
     '#collegeIdLabel': branding.college_id_label,
-
     '#languageLabel': branding.language_label,
-
     '#startButton': branding.start_button,
-
   };
 
-
-
   for (const [selector, value] of Object.entries(labels)) {
-
     const element = $(selector);
 
     if (element && typeof value === 'string' && value.trim()) {
-
       element.textContent = value;
-
     }
-
   }
-
-
 
   for (const [selector, source] of [
-
     ['#leftLogo', branding.left_logo],
-
     ['#rightLogo', branding.right_logo],
-
   ]) {
-
     const image = $(selector);
 
-
-
     if (image && typeof source === 'string' && source.trim()) {
-
       image.src = source.trim();
-
       image.classList.remove('hidden');
-
       image.onerror = () => image.classList.add('hidden');
-
     }
-
   }
 
-
-
   $('#adminBtn').textContent = 'Admin Results';
-
 }
 
-
-
 async function init() {
-
   $('#startButton').disabled = true;
-
   updateAdminButton();
 
-
-
   try {
-
     const data = await api('/api/config');
 
-
-
     state.config = data.config;
-
     state.capabilities = data.capabilities;
-
     applyEditableBranding(state.config);
-
-
 
     const cppAvailable = Boolean(data.capabilities.cpp?.available);
 
-
-
     $('#connectionBadge').textContent =
-
       `Python ready · C++ ${cppAvailable ? 'ready' : 'compiler missing'}`;
-
-
 
     const cppOption = $('#language option[value="cpp"]');
 
-
-
     if (cppOption) {
-
       cppOption.disabled = !cppAvailable;
-
       cppOption.textContent = cppAvailable
-
         ? 'C++'
-
         : 'C++ (compiler not detected)';
-
     }
-
-
 
     if (!cppAvailable && $('#language').value === 'cpp') {
-
       $('#language').value = 'python';
-
     }
 
-
-
     $('#startButton').disabled = false;
-
   } catch (error) {
-
     $('#connectionBadge').textContent = 'Engine unavailable';
-
     toast(error.message, 'error');
-
   }
-
 }
 
-
-
 $('#startForm').addEventListener('submit', async event => {
-
   event.preventDefault();
-
-
 
   if (!state.config || busy || isQuizActive()) return;
 
-
-
   state.participant = $('#participant').value.trim();
-
   state.collegeId = $('#collegeId').value.trim();
-
   state.language = $('#language').value;
 
-
-
   if (!state.participant) {
-
     toast('Enter your name.', 'error');
-
     return;
-
   }
-
-
 
   if (
-
     state.language === 'cpp' &&
-
     !state.capabilities.cpp?.available
-
   ) {
-
     toast('The server does not have a C++ compiler yet.', 'error');
-
     return;
-
   }
-
-
 
   busy = true;
-
   $('#startButton').disabled = true;
-
   $('#welcome').classList.add('hidden');
-
   $('#adminPanel').classList.add('hidden');
-
   $('#competition').classList.remove('hidden');
 
-
-
   try {
-
     await startRound1();
-
   } catch (error) {
-
     state.round = 0;
-
     document.body.classList.remove('quiz-active');
-
     $('#competition').classList.add('hidden');
-
     $('#welcome').classList.remove('hidden');
-
     updateAdminButton();
-
     toast(error.message, 'error');
-
   } finally {
-
     busy = false;
-
     $('#startButton').disabled = false;
-
   }
-
 });
-
 
 
 // ---------- Round 1 ----------
 
-
-
 async function startRound1() {
-
   state.round = 1;
-
   document.body.classList.add('quiz-active');
-
   updateAdminButton();
-
   setSteps(1);
-
-
 
   $('#roundPanel').textContent = 'Loading Round 1…';
 
-
-
   const data = await api(
-
     `/api/round1?language=${encodeURIComponent(state.language)}`
-
   );
 
-
-
   state.round1Token = data.token;
-
   state.round1Questions = data.questions;
 
-
-
   $('#roundPanel').innerHTML = `
-
     <div class="section-head">
-
       <div>
-
         <span class="round-pill">ROUND 1</span>
-
         <h2>Coding Aptitude & MCQ</h2>
-
         <p class="muted">
-
           Select your answers and submit to continue.
-
         </p>
-
       </div>
-
       <div class="score-card">${data.questions.length} questions</div>
-
     </div>
 
-
-
     <form id="round1Form">
-
       ${data.questions.map((question, index) => `
-
         <div class="question">
-
           <div class="qtext">
-
             ${index + 1}. ${escapeHtml(question.question)}
-
           </div>
-
           <div class="options">
-
             ${question.options.map((option, optionIndex) => `
-
               <label class="option">
-
                 <input
-
                   type="radio"
-
                   name="question_${index}"
-
                   value="${optionIndex}"
-
                 >
-
                 <span>${escapeHtml(option)}</span>
-
               </label>
-
             `).join('')}
-
           </div>
-
         </div>
-
       `).join('')}
 
-
-
       <div class="nav-row">
-
         <button class="primary" type="submit">
-
           Submit Round 1
-
         </button>
-
       </div>
-
     </form>
-
   `;
-
-
 
   $('#round1Form').addEventListener('submit', submitRound1);
 
-
-
   startTimer(
-
     state.config.round1_minutes,
-
     () => submitRound1(null, true)
-
   );
-
 }
 
-
-
 async function submitRound1(event, timedOut = false) {
-
   if (event) event.preventDefault();
-
   if (busy) return;
 
-
-
   const form = $('#round1Form');
-
   if (!form) return;
-
-
 
   const answers = {};
 
-
-
   state.round1Questions.forEach((question, index) => {
-
     const selected = $(
-
       `input[name="question_${index}"]:checked`,
-
       form
-
     );
 
-
-
     if (selected) answers[question.id] = Number(selected.value);
-
   });
 
-
-
   if (
-
     !timedOut &&
-
     Object.keys(answers).length < state.round1Questions.length &&
-
     !confirm('Some questions are unanswered. Submit anyway?')
-
   ) {
-
     return;
-
   }
 
-
-
   busy = true;
-
   stopTimer();
 
   $$('input, button', form).forEach(element => {
-
     element.disabled = true;
-
   });
 
-
-
   try {
-
     const result = await api('/api/round1/grade', {
-
       method: 'POST',
-
       body: JSON.stringify({
-
         token: state.round1Token,
-
         answers,
-
       }),
-
     });
 
-
-
     requireReceipt(result);
-
     state.round1Result = result;
 
-
-
     await renderRound1Result();
-
   } catch (error) {
-
     toast(error.message, 'error');
 
-
-
     // Keep answers locked after submission; allow a retry.
-
     const button = $('button[type="submit"]', form);
 
     if (button) {
-
       button.disabled = false;
-
       button.textContent = 'Retry submission';
-
     }
-
   } finally {
-
     busy = false;
-
   }
-
 }
-
-
 
 // No answers or marks are displayed.
-
 function renderRound1Result() {
-
   return transitionToRound(2);
-
 }
-
 
 
 // ---------- Round transitions ----------
 
-
-
 async function transitionToRound(roundNo) {
-
   if (loadingRound) return;
-
   loadingRound = true;
 
-
-
   $('#roundPanel').innerHTML = `
-
     <h2>Round ${roundNo - 1} submitted.</h2>
-
     <p id="transitionMessage">Opening Round ${roundNo}…</p>
-
     <button id="retryRound" class="primary" disabled>
-
       Continue to Round ${roundNo}
-
     </button>
-
   `;
 
-
-
   $('#retryRound').addEventListener('click', () => {
-
     transitionToRound(roundNo);
-
   });
 
-
-
   try {
-
     if (roundNo === 2) await startRound2();
-
     else await startRound3();
-
   } catch (error) {
-
     $('#transitionMessage').textContent =
-
       'Could not load the next round. Click Continue to retry.';
-
     $('#retryRound').disabled = false;
-
     toast(error.message, 'error');
-
   } finally {
-
     loadingRound = false;
-
   }
-
 }
-
-
 
 function startRound2() {
-
   return startCodingRound(2);
-
 }
-
-
 
 function startRound3() {
-
   return startCodingRound(3);
-
 }
 
-
-
 async function startCodingRound(roundNo) {
-
-  const data = await api(`/api/problems?round=${roundNo}&language=${encodeURIComponent(state.language)}`);
-
-
+  const data = await api(
+    `/api/problems?round=${roundNo}&language=${encodeURIComponent(state.language)}`
+  );
 
   if (!Array.isArray(data.problems) || !data.problems.length) {
-
     throw new Error(`No problems configured for Round ${roundNo}.`);
-
   }
-
-
 
   state.round = roundNo;
 
-
-
   if (roundNo === 2) state.round2Problems = data.problems;
-
   else state.round3Problems = data.problems;
 
-
-
   setSteps(roundNo);
-
   renderCodingRound(roundNo, data.problems);
 
-
-
   startTimer(
-
     state.config[`round${roundNo}_minutes`],
-
     () => roundNo === 2 ? finishRound2() : finishRound3()
-
   );
-
 }
 
 
-
 // ---------- Coding interface ----------
-
-
 
 function renderCodingRound(roundNo, problems) {
   $('#roundPanel').innerHTML = `
@@ -1010,13 +544,11 @@ function renderCodingRound(roundNo, problems) {
   showProblem(problems[0], roundNo, 0, problems);
 }
 
-
 function activateProblemTab(index) {
   $$('.problem-tab').forEach((tab, tabIndex) => {
     tab.classList.toggle('active', tabIndex === index);
   });
 }
-
 
 function showProblem(problem, roundNo, currentIndex, problems) {
   const key = editorKey(problem.id);
@@ -1146,10 +678,8 @@ ${escapeHtml(sample.output)}</div>
     saveCurrentEditor();
 
     const runButton = $('#runCode');
-
     runButton.disabled = true;
     runButton.textContent = 'Running…';
-
     $('#console').textContent = 'Running code…';
 
     try {
@@ -1192,9 +722,7 @@ ${test.stderr || ''}`;
         output.join('\n\n') ||
         'Program finished with no output.';
     } catch (error) {
-      $('#console').textContent =
-        `Error: ${error.message}`;
-
+      $('#console').textContent = `Error: ${error.message}`;
       toast(error.message, 'error');
     } finally {
       if (runButton?.isConnected) {
@@ -1250,8 +778,6 @@ ${test.stderr || ''}`;
 
 // ---------- Private grading and final submission ----------
 
-
-
 async function evaluate(problem, mode, roundNo) {
   const code =
     state.editorCache[editorKey(problem.id)] ??
@@ -1275,434 +801,248 @@ async function evaluate(problem, mode, roundNo) {
   return result;
 }
 
-
 function finishRound2() {
-
   return finishCodingRound(2);
-
 }
-
-
 
 function finishRound3() {
-
   return finishCodingRound(3);
-
 }
 
-
-
 async function finishCodingRound(roundNo) {
-
   if (busy || state.round !== roundNo) return;
 
-
-
   busy = true;
-
   stopTimer();
-
   saveCurrentEditor();
 
-
-
   const problems = roundNo === 2
-
     ? state.round2Problems
-
     : state.round3Problems;
-
-
 
   const finishButton = $('#finishCodingRound');
 
-
-
   // Freeze the submitted code, including when a retry is needed.
-
   $$('button, textarea', $('#roundPanel')).forEach(element => {
-
     element.disabled = true;
-
   });
-
-
 
   if ($('#console')) {
-
     $('#console').textContent = 'Submitting this round. Please wait…';
-
   }
-
-
 
   try {
-
     for (const problem of problems) {
-
       // Reuse successful receipts if a later request failed.
-
       if (!privateReceipts[roundNo][problem.id]) {
-
         await evaluate(problem, 'submit', roundNo);
-
       }
-
     }
-
-
 
     if (roundNo === 2) await transitionToRound(3);
-
     else await showFinal();
-
   } catch (error) {
-
     toast(error.message, 'error');
 
-
-
     if ($('#console')) {
-
       $('#console').textContent =
-
         'Submission could not be completed. Click Retry submission.';
-
     }
-
-
 
     if (finishButton?.isConnected) {
-
       finishButton.disabled = false;
-
       finishButton.textContent = 'Retry submission';
-
     }
-
   } finally {
-
     busy = false;
-
   }
-
 }
-
-
 
 async function showFinal() {
-
   const saved = await api('/api/results', {
-
     method: 'POST',
-
     body: JSON.stringify({
-
       participant: state.participant,
-
       college_id: state.collegeId,
-
       language: state.language,
-
       round1_receipt: state.round1Result.receipt,
-
       round2_receipts: privateReceipts[2],
-
       round3_receipts: privateReceipts[3],
-
     }),
-
   });
 
-
-
   if (!saved.saved) {
-
     throw new Error('The server did not confirm your submission.');
-
   }
 
-
-
   stopTimer();
-
   state.round = 0;
-
   state.completed = true;
-
   document.body.classList.remove('quiz-active');
-
   setSteps(4);
-
   updateAdminButton();
 
-
-
   $('#roundPanel').innerHTML = `
-
     <div class="result-banner ok">
-
       <h2>Submitted successfully!</h2>
-
       <p>Thank you, ${escapeHtml(state.participant)}.</p>
-
       <p>You have completed all three rounds.</p>
-
       <p>Results will be announced by the organizers.</p>
-
       <p class="small muted">
-
         Submission ID: ${escapeHtml(saved.id)}
-
       </p>
-
     </div>
-
   `;
-
 }
-
 
 
 // ---------- Admin results ----------
 
-
-
 window.addEventListener('hashchange', updateAdminButton);
 
-
-
 $('#adminBtn').addEventListener('click', async () => {
-
   if (isQuizActive()) return;
 
-
-
   const entered = prompt(
-
     'Enter the admin password shown in the server terminal:'
-
   );
-
-
 
   if (!entered) return;
 
-
-
   try {
-
     const data = await api('/api/results', {
-
       headers: {
-
         'X-Admin-Password': entered,
-
       },
-
     });
 
-
-
     adminPassword = entered;
-
     const rows = data.results || [];
 
-
-
     $('#resultsTable').innerHTML = rows.length
-
-    
       ? `
-
         <table class="results-table">
-
           <thead>
-
             <tr>
-
               <th>Saved</th>
-
               <th>Participant</th>
-
               <th>ID</th>
-
               <th>Language</th>
-
               <th>Round 1</th>
-
               <th>Round 2</th>
-
               <th>Round 3</th>
-
+              <th>Total / 300</th>
             </tr>
-
           </thead>
 
           <tbody>
+            ${rows.map(row => {
+              const r1 = Number(row.round1?.percent ?? 0);
+              const r2 = Number(row.round2?.percent ?? 0);
 
-            ${rows.map(row => `
+              const r3Passed = Number(row.round3?.passed ?? 0);
+              const r3Total = Number(row.round3?.total ?? 0);
 
-              <tr>
+              const r3Percent = r3Total > 0
+                ? (r3Passed / r3Total) * 100
+                : 0;
 
-                <td>${escapeHtml(row.saved_at)}</td>
+              const total = (r1 + r2 + r3Percent).toFixed(2);
 
-                <td>${escapeHtml(row.participant)}</td>
+              return `
+                <tr>
+                  <td>${escapeHtml(row.saved_at)}</td>
+                  <td>${escapeHtml(row.participant)}</td>
+                  <td>${escapeHtml(row.college_id)}</td>
+                  <td>${escapeHtml(row.language)}</td>
 
-                <td>${escapeHtml(row.college_id)}</td>
+                  <td>
+                    ${escapeHtml(row.round1?.percent ?? '-')}%
+                  </td>
 
-                <td>${escapeHtml(row.language)}</td>
+                  <td>
+                    ${escapeHtml(row.round2?.percent ?? '-')}%
+                  </td>
 
-                <td>${escapeHtml(row.round1?.percent ?? '-')}%</td>
+                  <td>
+                    ${escapeHtml(row.round3?.passed ?? '-')} /
+                    ${escapeHtml(row.round3?.total ?? '-')}
+                  </td>
 
-                <td>${escapeHtml(row.round2?.percent ?? '-')}%</td>
-
-                <td>
-
-                  ${escapeHtml(row.round3?.passed ?? '-')} /
-
-                  ${escapeHtml(row.round3?.total ?? '-')}
-
-                </td>
-
-              </tr>
-
-            `).join('')}
-
+                  <td style="color: var(--accent); font-weight: 800;">
+                    ${total} / 300
+                  </td>
+                </tr>
+              `;
+            }).join('')}
           </tbody>
-
         </table>
-
       `
-
       : '<p class="muted">No saved attempts yet.</p>';
 
-
-
     $('#welcome').classList.add('hidden');
-
     $('#competition').classList.add('hidden');
-
     $('#adminPanel').classList.remove('hidden');
-
   } catch (error) {
-
     adminPassword = '';
-
     toast(error.message, 'error');
-
   }
-
 });
-
-
 
 $('#closeAdmin').addEventListener('click', () => {
-
   adminPassword = '';
-
   $('#resultsTable').innerHTML = '';
-
   $('#adminPanel').classList.add('hidden');
 
-
-
   if (isQuizActive() || state.completed) {
-
     $('#competition').classList.remove('hidden');
-
   } else {
-
     $('#welcome').classList.remove('hidden');
-
   }
-
 });
 
-
-
 $('a[href="/api/results.csv"]')?.addEventListener(
-
   'click',
-
   async event => {
-
     event.preventDefault();
 
-
-
     if (!adminPassword) {
-
       toast('Open Admin Results and enter the password first.', 'error');
-
       return;
-
     }
 
-
-
     try {
-
       const response = await fetch('/api/results.csv', {
-
         headers: {
-
           'X-Admin-Password': adminPassword,
-
         },
-
         cache: 'no-store',
-
       });
 
-
-
       if (!response.ok) {
-
         throw new Error('Admin access denied. Open Admin Results again.');
-
       }
 
-
-
       const blob = await response.blob();
-
       const url = URL.createObjectURL(blob);
-
       const link = document.createElement('a');
 
-
-
       link.href = url;
-
       link.download = 'Code_Rookie_Results.csv';
 
       document.body.appendChild(link);
-
       link.click();
-
       link.remove();
 
-
-
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-
     } catch (error) {
-
       toast(error.message, 'error');
-
     }
-
   }
-
 );
 
 
-
 // ---------- Desktop and mobile quiz protection ----------
-
-// Keep the existing tabResetTriggered variable near the top.
-// Do not declare it again here.
 
 function blockQuizClipboard(event) {
   if (!isQuizActive()) return;
@@ -1767,6 +1107,9 @@ document.addEventListener('keydown', event => {
 function invalidateQuizForLeaving() {
   if (!isQuizActive() || tabResetTriggered) return;
 
+  // Record the departure before clearing this attempt.
+  recordQuizDeparture();
+
   tabResetTriggered = true;
   stopTimer();
 
@@ -1821,7 +1164,7 @@ window.addEventListener('pageshow', () => {
   resumeQuizScreen();
 });
 
-// Fallback return check. Losing focus alone does not reset the quiz,
+// Losing focus alone does not reset the quiz,
 // because keyboards and browser dialogs can affect focus.
 window.addEventListener('focus', resumeQuizScreen);
 
@@ -1881,7 +1224,9 @@ if (startForm) {
 showTabResetMessage();
 init();
 
-// Add a Reset All Results button to the admin panel.
+
+// ---------- Reset saved results ----------
+
 (function addAdminResetButton() {
   const closeButton = document.getElementById('closeAdmin');
 
@@ -1972,5 +1317,259 @@ init();
       resetButton.disabled = false;
       resetButton.textContent = 'Reset All Results';
     }
+  });
+})();
+
+
+// ---------- Activity warning delivery ----------
+
+const warningQueueKey = 'codeRookiePendingWarnings';
+let sendingWarnings = false;
+
+function readPendingWarnings() {
+  try {
+    const value = JSON.parse(
+      sessionStorage.getItem(warningQueueKey) || '[]'
+    );
+
+    return Array.isArray(value) ? value : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function writePendingWarnings(rows) {
+  try {
+    sessionStorage.setItem(warningQueueKey, JSON.stringify(rows));
+  } catch (_) {
+    // Direct delivery can still work if storage is unavailable.
+  }
+}
+
+function recordQuizDeparture() {
+  try {
+    const warning = {
+      event_id: crypto.randomUUID(),
+      participant: state.participant,
+      college_id: state.collegeId,
+      language: state.language,
+      round: state.round,
+      reported_at: new Date().toISOString()
+    };
+
+    const pending = readPendingWarnings();
+    pending.push(warning);
+    writePendingWarnings(pending);
+
+    // Try to send while the page is being hidden or closed.
+    const body = JSON.stringify(warning);
+    let queued = false;
+
+    try {
+      queued = navigator.sendBeacon(
+        '/api/activity-warnings',
+        new Blob([body], { type: 'application/json' })
+      );
+    } catch (_) {}
+
+    if (!queued) {
+      fetch('/api/activity-warnings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        keepalive: true
+      }).catch(() => {});
+    }
+
+    // Keep the local copy until a later request confirms receipt.
+    // The server deduplicates using event_id.
+  } catch (_) {
+    // A logging failure must not prevent the existing quiz reset.
+  }
+}
+
+async function flushPendingWarnings() {
+  if (sendingWarnings || document.hidden) return;
+  sendingWarnings = true;
+
+  try {
+    for (const warning of readPendingWarnings()) {
+      const response = await fetch('/api/activity-warnings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(warning),
+        keepalive: true
+      });
+
+      if (!response.ok) break;
+
+      const result = await response.json();
+      if (!result.saved) break;
+
+      writePendingWarnings(
+        readPendingWarnings().filter(
+          item => item.event_id !== warning.event_id
+        )
+      );
+    }
+  } catch (_) {
+    // Retry when the connection returns or the page reloads.
+  } finally {
+    sendingWarnings = false;
+  }
+}
+
+window.addEventListener('online', flushPendingWarnings);
+window.addEventListener('pageshow', flushPendingWarnings);
+flushPendingWarnings();
+
+
+// ---------- Admin-only warning viewer ----------
+
+(function addActivityWarningsPanel() {
+  const adminPanel = document.getElementById('adminPanel');
+  const closeButton = document.getElementById('closeAdmin');
+
+  if (!adminPanel || !closeButton) return;
+  if (document.getElementById('viewActivityWarnings')) return;
+
+  const button = document.createElement('button');
+  button.id = 'viewActivityWarnings';
+  button.type = 'button';
+  button.className = 'ghost';
+  button.textContent = 'Activity warnings';
+
+  closeButton.before(button);
+
+  const section = document.createElement('section');
+  section.className = 'hidden';
+  section.style.marginTop = '24px';
+
+  const heading = document.createElement('h3');
+  heading.textContent = 'Detected quiz departures';
+
+  const note = document.createElement('p');
+  note.className = 'muted';
+  note.textContent =
+    'Browser-reported events, not proof of cheating. ' +
+    'Times below are server receipt times in India.';
+
+  const tableHost = document.createElement('div');
+  tableHost.className = 'table-wrap';
+
+  section.append(heading, note, tableHost);
+  adminPanel.append(section);
+
+  button.addEventListener('click', async () => {
+    if (!adminPassword) {
+      toast('Open Admin Results and log in first.', 'error');
+      return;
+    }
+
+    const passwordForRequest = adminPassword;
+    button.disabled = true;
+    section.classList.remove('hidden');
+    tableHost.textContent = 'Loading warnings…';
+
+    try {
+      const response = await fetch('/api/activity-warnings', {
+        headers: {
+          'X-Admin-Password': passwordForRequest
+        },
+        cache: 'no-store'
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Could not load warnings.');
+      }
+
+      // Do not display a late response after the admin logs out.
+      if (
+        adminPassword !== passwordForRequest ||
+        adminPanel.classList.contains('hidden')
+      ) return;
+
+      const rows = data.warnings;
+
+      if (!Array.isArray(rows)) {
+        throw new Error('Invalid warning response.');
+      }
+
+      if (!rows.length) {
+        tableHost.textContent = 'No activity warnings recorded yet.';
+        return;
+      }
+
+      const identityKey = row => JSON.stringify([
+        row.participant,
+        row.college_id,
+        row.language
+      ]);
+
+      const counts = new Map();
+
+      rows.forEach(row => {
+        const key = identityKey(row);
+        counts.set(key, (counts.get(key) || 0) + 1);
+      });
+
+      const table = document.createElement('table');
+      table.className = 'results-table';
+
+      const header = table.createTHead().insertRow();
+
+      [
+        'Received (IST)',
+        'Participant',
+        'College ID',
+        'Language',
+        'Round',
+        'Total warnings'
+      ].forEach(label => {
+        const th = document.createElement('th');
+        th.textContent = label;
+        header.append(th);
+      });
+
+      const body = table.createTBody();
+
+      rows.forEach(row => {
+        const date = new Date(row.received_at);
+
+        const time = Number.isNaN(date.getTime())
+          ? row.received_at
+          : date.toLocaleString('en-IN', {
+              timeZone: 'Asia/Kolkata'
+            });
+
+        const tr = body.insertRow();
+
+        [
+          time,
+          row.participant,
+          row.college_id || '—',
+          row.language,
+          row.round,
+          counts.get(identityKey(row))
+        ].forEach(value => {
+          tr.insertCell().textContent = String(value ?? '');
+        });
+      });
+
+      tableHost.replaceChildren(table);
+    } catch (error) {
+      if (adminPassword === passwordForRequest) {
+        tableHost.textContent = error.message;
+      }
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  closeButton.addEventListener('click', () => {
+    section.classList.add('hidden');
+    tableHost.replaceChildren();
   });
 })();
