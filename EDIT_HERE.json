@@ -836,355 +836,341 @@
     "r3_py_py001": {
       "round": 3,
       "language": "python",
-      "title": "Even or Odd",
+      "title": "Second Largest Distinct Number",
       "kind": "test-case challenge",
-      "statement": "Write a program to check whether a given integer is even or odd.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
-      "difficulty": "Easy",
-      "marks": 10,
+      "statement": "You are given N integers representing scores obtained by participants in a competition. Your task is to find the second largest DISTINCT score. If there are fewer than two distinct scores, print -1. Duplicate scores must be counted only once.",
+      "input_format": "The first line contains an integer N. The second line contains N space-separated integers.",
+      "output_format": "Print the second largest distinct number. If it does not exist, print -1.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "constraints": [
+        "2 <= N <= 100000",
+        "-1000000000 <= score <= 1000000000"
+      ],
       "samples": [
         {
-          "input": "24\n",
-          "output": "Even\n"
+          "input": "7\n10 50 20 50 40 30 40",
+          "output": "40"
+        },
+        {
+          "input": "6\n8 8 8 5 5 2",
+          "output": "5"
+        },
+        {
+          "input": "5\n100 100 100 100 100",
+          "output": "-1"
         }
       ],
       "starter": {
-        "python": "number = int(input())\n\nif number % 2 = 0:\n    print(\"Even\")\nelse:\n    print(\"Odd\")",
-        "cpp": "number = int(input())\n\nif number % 2 = 0:\n    print(\"Even\")\nelse:\n    print(\"Odd\")"
+        "python": "",
+        "cpp": ""
       },
       "tests": [
         {
-          "input": "24",
-          "expected": "Even"
+          "input": "7\n10 50 20 50 40 30 40",
+          "expected": "40"
         },
         {
-          "input": "17",
-          "expected": "Odd"
+          "input": "6\n8 8 8 5 5 2",
+          "expected": "5"
         },
         {
-          "input": "0",
-          "expected": "Even"
+          "input": "5\n100 100 100 100 100",
+          "expected": "-1"
         }
       ],
-      "corrected_code": "number = int(input())\n\nif number % 2 == 0:\n    print(\"Even\")\nelse:\n    print(\"Odd\")",
-      "answer_explanation": "The comparison operator is incorrect. Python uses == to compare two values, while = is used for assignment."
+      "corrected_code": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nlargest = None\nsecond_largest = None\n\nfor num in numbers:\n    if largest is None or num > largest:\n        if largest != num:\n            second_largest = largest\n        largest = num\n\n    elif num != largest and (second_largest is None or num > second_largest):\n        second_largest = num\n\nif second_largest is None:\n    print(-1)\nelse:\n    print(second_largest)",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
     },
     "r3_py_py002": {
       "round": 3,
       "language": "python",
-      "title": "Largest of Three Numbers",
+      "title": "First Non-Repeating Character",
       "kind": "test-case challenge",
-      "statement": "Write a program to find the largest among three integers.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
-      "difficulty": "Easy",
-      "marks": 10,
+      "statement": "A system receives a string containing lowercase English letters. Find the first character that occurs exactly once in the string. The character must be returned according to its original position. If every character appears more than once, print -1.",
+      "input_format": "The input contains a single string.",
+      "output_format": "Print the first non-repeating character. If no such character exists, print -1.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "constraints": [
+        "1 <= length of string <= 100000",
+        "The string contains only lowercase English letters."
+      ],
       "samples": [
         {
-          "input": "10 25 15\n",
-          "output": "25\n"
+          "input": "swiss",
+          "output": "w"
+        },
+        {
+          "input": "aabbccdde",
+          "output": "e"
+        },
+        {
+          "input": "programming",
+          "output": "p"
+        },
+        {
+          "input": "aabbcc",
+          "output": "-1"
         }
       ],
       "starter": {
-        "python": "a, b, c = map(int, input().split())\n\nlargest = a\n\nif b < largest:\n    largest = b\n\nif c < largest:\n    largest = c\n\nprint(largest)",
-        "cpp": "a, b, c = map(int, input().split())\n\nlargest = a\n\nif b < largest:\n    largest = b\n\nif c < largest:\n    largest = c\n\nprint(largest)"
+        "python": "",
+        "cpp": ""
       },
       "tests": [
         {
-          "input": "10 25 15",
-          "expected": "25"
+          "input": "swiss",
+          "expected": "w"
         },
         {
-          "input": "50 30 40",
-          "expected": "50"
+          "input": "aabbccdde",
+          "expected": "e"
         },
         {
-          "input": "7 7 5",
-          "expected": "7"
+          "input": "programming",
+          "expected": "p"
+        },
+        {
+          "input": "aabbcc",
+          "expected": "-1"
         }
       ],
-      "corrected_code": "a, b, c = map(int, input().split())\n\nlargest = a\n\nif b > largest:\n    largest = b\n\nif c > largest:\n    largest = c\n\nprint(largest)",
-      "answer_explanation": "The program incorrectly checks whether b and c are smaller than the current largest value. To find the largest value, each number must be compared using >."
+      "corrected_code": "text = input().strip()\n\nfrequency = {}\n\nfor char in text:\n    frequency[char] = frequency.get(char, 0) + 1\n\nanswer = -1\n\nfor char in text:\n    if frequency[char] == 1:\n        answer = char\n        break\n\nprint(answer)",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
     },
     "r3_py_py003": {
       "round": 3,
       "language": "python",
-      "title": "Sum of Digits",
+      "title": "Longest Consecutive Sequence",
       "kind": "test-case challenge",
-      "statement": "Write a program to find the sum of the digits of a given positive integer.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
-      "difficulty": "Easy",
-      "marks": 10,
+      "statement": "You are given an unsorted array of integers. Find the length of the longest sequence of consecutive integers. The numbers in the sequence do not need to appear next to each other in the input array. Duplicate values must not increase the length.",
+      "input_format": "The first line contains N. The second line contains N space-separated integers.",
+      "output_format": "Print the length of the longest consecutive sequence.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "constraints": [
+        "1 <= N <= 100000",
+        "-1000000000 <= number <= 1000000000"
+      ],
       "samples": [
         {
-          "input": "1234\n",
-          "output": "10\n"
+          "input": "6\n100 4 200 1 3 2",
+          "output": "4"
+        },
+        {
+          "input": "7\n10 5 12 3 55 4 11",
+          "output": "3"
+        },
+        {
+          "input": "5\n8 8 8 8 8",
+          "output": "1"
         }
       ],
       "starter": {
-        "python": "number = int(input())\nsum_digits = 0\n\nwhile number > 0:\n    digit = number % 10\n    sum_digits = digit\n    number = number // 10\n\nprint(sum_digits)",
-        "cpp": "number = int(input())\nsum_digits = 0\n\nwhile number > 0:\n    digit = number % 10\n    sum_digits = digit\n    number = number // 10\n\nprint(sum_digits)"
+        "python": "",
+        "cpp": ""
       },
       "tests": [
         {
-          "input": "1234",
-          "expected": "10"
+          "input": "6\n100 4 200 1 3 2",
+          "expected": "4"
         },
         {
-          "input": "505",
-          "expected": "10"
+          "input": "7\n10 5 12 3 55 4 11",
+          "expected": "3"
         },
         {
-          "input": "9",
-          "expected": "9"
+          "input": "5\n8 8 8 8 8",
+          "expected": "1"
         }
       ],
-      "corrected_code": "number = int(input())\nsum_digits = 0\n\nwhile number > 0:\n    digit = number % 10\n    sum_digits += digit\n    number = number // 10\n\nprint(sum_digits)",
-      "answer_explanation": "The program replaces sum_digits with every digit instead of adding each digit to the existing sum. The += operator is required."
+      "corrected_code": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nvalues = set(numbers)\nlongest = 0\n\nfor num in values:\n    if num - 1 not in values:\n        current = num\n        length = 1\n\n        while current + 1 in values:\n            current += 1\n            length += 1\n\n        longest = max(longest, length)\n\nprint(longest)",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
     },
     "r3_py_py004": {
       "round": 3,
       "language": "python",
-      "title": "Second Largest Distinct Number",
+      "title": "Subarray With Target Sum",
       "kind": "test-case challenge",
-      "statement": "Given an array of N integers, find the second largest distinct number. If a second largest distinct number does not exist, print -1.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
+      "statement": "You are given an array of positive integers and a target value K. Find the length of the smallest contiguous subarray whose sum is greater than or equal to K. If no such subarray exists, print 0.",
+      "input_format": "The first line contains two integers N and K. The second line contains N positive integers.",
+      "output_format": "Print the minimum length of a contiguous subarray whose sum is at least K. Print 0 if no such subarray exists.",
       "difficulty": "Difficult",
       "marks": 20,
+      "constraints": [
+        "1 <= N <= 100000",
+        "1 <= K <= 1000000000",
+        "1 <= array element <= 100000"
+      ],
       "samples": [
         {
-          "input": "6\n10 20 40 30 40 15\n",
-          "output": "30\n"
+          "input": "6 7\n2 3 1 2 4 3",
+          "output": "2"
+        },
+        {
+          "input": "5 15\n1 2 3 4 5",
+          "output": "5"
+        },
+        {
+          "input": "4 20\n1 2 3 4",
+          "output": "0"
         }
       ],
       "starter": {
-        "python": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nnumbers.sort(reverse=True)\n\nif n < 2:\n    print(-1)\nelse:\n    print(numbers[1])",
-        "cpp": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nnumbers.sort(reverse=True)\n\nif n < 2:\n    print(-1)\nelse:\n    print(numbers[1])"
+        "python": "",
+        "cpp": ""
       },
       "tests": [
         {
-          "input": "6\n10 20 40 30 40 15",
-          "expected": "30"
+          "input": "6 7\n2 3 1 2 4 3",
+          "expected": "2"
         },
         {
-          "input": "5\n7 7 7 7 7",
-          "expected": "-1"
+          "input": "5 15\n1 2 3 4 5",
+          "expected": "5"
         },
         {
-          "input": "6\n-10 -5 -3 -3 -8 -6",
-          "expected": "-5"
+          "input": "4 20\n1 2 3 4",
+          "expected": "0"
         }
       ],
-      "corrected_code": "n = int(input())\nnumbers = list(map(int, input().split()))\n\nunique_numbers = sorted(set(numbers), reverse=True)\n\nif len(unique_numbers) < 2:\n    print(-1)\nelse:\n    print(unique_numbers[1])",
-      "answer_explanation": "The second largest value must be distinct. Sorting the original array and selecting index 1 fails when the largest value occurs more than once. Duplicate values must be removed before selecting the second largest value."
+      "corrected_code": "n, k = map(int, input().split())\nnumbers = list(map(int, input().split()))\n\nleft = 0\ncurrent_sum = 0\nminimum = n + 1\n\nfor right in range(n):\n    current_sum += numbers[right]\n\n    while current_sum >= k:\n        minimum = min(minimum, right - left + 1)\n        current_sum -= numbers[left]\n        left += 1\n\nif minimum == n + 1:\n    print(0)\nelse:\n    print(minimum)",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
     },
     "r3_py_py005": {
       "round": 3,
       "language": "python",
-      "title": "First Non-Repeating Character",
+      "title": "Spiral Matrix Traversal",
       "kind": "test-case challenge",
-      "statement": "Given a string, find the first character that appears exactly once. If every character is repeated, print -1.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
+      "statement": "You are given a rectangular matrix with N rows and M columns. Print all elements of the matrix in spiral order, starting from the top-left corner. The traversal must move right, down, left and up repeatedly while avoiding already visited cells.",
+      "input_format": "The first line contains N and M. The next N lines contain M space-separated integers.",
+      "output_format": "Print all matrix elements in spiral order separated by spaces.",
       "difficulty": "Difficult",
       "marks": 20,
+      "constraints": [
+        "1 <= N, M <= 100",
+        "-1000 <= matrix element <= 1000"
+      ],
       "samples": [
         {
-          "input": "swiss\n",
-          "output": "w\n"
+          "input": "3 4\n1 2 3 4\n5 6 7 8\n9 10 11 12",
+          "output": "1 2 3 4 8 12 11 10 9 5 6 7"
+        },
+        {
+          "input": "2 3\n1 2 3\n4 5 6",
+          "output": "1 2 3 6 5 4"
+        },
+        {
+          "input": "1 4\n7 8 9 10",
+          "output": "7 8 9 10"
         }
       ],
       "starter": {
-        "python": "text = input()\n\nfor char in text:\n    if text.count(char) > 1:\n        print(char)\n        break\nelse:\n    print(-1)",
-        "cpp": "text = input()\n\nfor char in text:\n    if text.count(char) > 1:\n        print(char)\n        break\nelse:\n    print(-1)"
+        "python": "",
+        "cpp": ""
       },
       "tests": [
         {
-          "input": "swiss",
-          "expected": "w"
+          "input": "3 4\n1 2 3 4\n5 6 7 8\n9 10 11 12",
+          "expected": "1 2 3 4 8 12 11 10 9 5 6 7"
         },
         {
-          "input": "aabbcc",
-          "expected": "-1"
+          "input": "2 3\n1 2 3\n4 5 6",
+          "expected": "1 2 3 6 5 4"
         },
         {
-          "input": "programming",
-          "expected": "p"
+          "input": "1 4\n7 8 9 10",
+          "expected": "7 8 9 10"
         }
       ],
-      "corrected_code": "text = input()\n\nfor char in text:\n    if text.count(char) == 1:\n        print(char)\n        break\nelse:\n    print(-1)",
-      "answer_explanation": "The program currently selects the first character that appears more than once. The requirement is to find the first character whose frequency is exactly one."
+      "corrected_code": "n, m = map(int, input().split())\n\nmatrix = []\n\nfor _ in range(n):\n    matrix.append(list(map(int, input().split())))\n\ntop = 0\nbottom = n - 1\nleft = 0\nright = m - 1\n\nresult = []\n\nwhile top <= bottom and left <= right:\n\n    for col in range(left, right + 1):\n        result.append(matrix[top][col])\n    top += 1\n\n    for row in range(top, bottom + 1):\n        result.append(matrix[row][right])\n    right -= 1\n\n    if top <= bottom:\n        for col in range(right, left - 1, -1):\n            result.append(matrix[bottom][col])\n        bottom -= 1\n\n    if left <= right:\n        for row in range(bottom, top - 1, -1):\n            result.append(matrix[row][left])\n        left += 1\n\nprint(*result)",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
     },
     "r3_cpp_cpp001": {
       "round": 3,
       "language": "cpp",
-      "title": "Even or Odd",
+      "title": "Second Largest Distinct Number",
       "kind": "test-case challenge",
-      "statement": "Write a program to check whether a given integer is even or odd.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
-      "difficulty": "Easy",
-      "marks": 10,
+      "statement": "You are given N integers representing scores obtained by participants in a competition. Your task is to find the second largest DISTINCT score. If there are fewer than two distinct scores, print -1. Duplicate scores must be counted only once.",
+      "input_format": "The first line contains an integer N. The second line contains N space-separated integers.",
+      "output_format": "Print the second largest distinct number. If it does not exist, print -1.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "constraints": [
+        "2 <= N <= 100000",
+        "-1000000000 <= score <= 1000000000"
+      ],
       "samples": [
         {
-          "input": "24\n",
-          "output": "Even\n"
+          "input": "7\n10 50 20 50 40 30 40",
+          "output": "40"
+        },
+        {
+          "input": "6\n8 8 8 5 5 2",
+          "output": "5"
+        },
+        {
+          "input": "5\n100 100 100 100 100",
+          "output": "-1"
         }
       ],
       "starter": {
-        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    if (number % 2 = 0) {\n        cout << \"Even\";\n    } else {\n        cout << \"Odd\";\n    }\n\n    return 0;\n}",
-        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    if (number % 2 = 0) {\n        cout << \"Even\";\n    } else {\n        cout << \"Odd\";\n    }\n\n    return 0;\n}"
+        "python": "",
+        "cpp": ""
       },
       "tests": [
         {
-          "input": "24",
-          "expected": "Even"
+          "input": "7\n10 50 20 50 40 30 40",
+          "expected": "40"
         },
         {
-          "input": "17",
-          "expected": "Odd"
+          "input": "6\n8 8 8 5 5 2",
+          "expected": "5"
         },
         {
-          "input": "0",
-          "expected": "Even"
+          "input": "5\n100 100 100 100 100",
+          "expected": "-1"
         }
       ],
-      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    if (number % 2 == 0) {\n        cout << \"Even\";\n    } else {\n        cout << \"Odd\";\n    }\n\n    return 0;\n}",
-      "answer_explanation": "The condition incorrectly uses the assignment operator =. The equality comparison operator == must be used to check whether the remainder is zero."
+      "corrected_code": "#include <iostream>\n#include <climits>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    long long largest = LLONG_MIN;\n    long long secondLargest = LLONG_MIN;\n\n    for (int i = 0; i < n; i++) {\n        long long x;\n        cin >> x;\n\n        if (x > largest) {\n            if (x != largest) {\n                secondLargest = largest;\n            }\n            largest = x;\n        }\n        else if (x != largest && x > secondLargest) {\n            secondLargest = x;\n        }\n    }\n\n    if (secondLargest == LLONG_MIN) {\n        cout << -1;\n    } else {\n        cout << secondLargest;\n    }\n\n    return 0;\n}",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
     },
     "r3_cpp_cpp002": {
       "round": 3,
       "language": "cpp",
-      "title": "Largest of Three Numbers",
-      "kind": "test-case challenge",
-      "statement": "Write a program to find the largest among three integers.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
-      "difficulty": "Easy",
-      "marks": 10,
-      "samples": [
-        {
-          "input": "10 25 15\n",
-          "output": "25\n"
-        }
-      ],
-      "starter": {
-        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n\n    int largest = a;\n\n    if (b < largest) {\n        largest = b;\n    }\n\n    if (c < largest) {\n        largest = c;\n    }\n\n    cout << largest;\n    return 0;\n}",
-        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n\n    int largest = a;\n\n    if (b < largest) {\n        largest = b;\n    }\n\n    if (c < largest) {\n        largest = c;\n    }\n\n    cout << largest;\n    return 0;\n}"
-      },
-      "tests": [
-        {
-          "input": "10 25 15",
-          "expected": "25"
-        },
-        {
-          "input": "50 30 40",
-          "expected": "50"
-        },
-        {
-          "input": "7 7 5",
-          "expected": "7"
-        }
-      ],
-      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n\n    int largest = a;\n\n    if (b > largest) {\n        largest = b;\n    }\n\n    if (c > largest) {\n        largest = c;\n    }\n\n    cout << largest;\n    return 0;\n}",
-      "answer_explanation": "The comparisons are reversed. To find the largest value, b and c must replace largest only when they are greater than the current largest value."
-    },
-    "r3_cpp_cpp003": {
-      "round": 3,
-      "language": "cpp",
-      "title": "Sum of Digits",
-      "kind": "test-case challenge",
-      "statement": "Write a program to find the sum of the digits of a given positive integer.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
-      "difficulty": "Easy",
-      "marks": 10,
-      "samples": [
-        {
-          "input": "1234\n",
-          "output": "10\n"
-        }
-      ],
-      "starter": {
-        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    int sum = 0;\n\n    while (number > 0) {\n        int digit = number % 10;\n        sum = digit;\n        number = number / 10;\n    }\n\n    cout << sum;\n    return 0;\n}",
-        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    int sum = 0;\n\n    while (number > 0) {\n        int digit = number % 10;\n        sum = digit;\n        number = number / 10;\n    }\n\n    cout << sum;\n    return 0;\n}"
-      },
-      "tests": [
-        {
-          "input": "1234",
-          "expected": "10"
-        },
-        {
-          "input": "505",
-          "expected": "10"
-        },
-        {
-          "input": "9",
-          "expected": "9"
-        }
-      ],
-      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int number;\n    cin >> number;\n\n    int sum = 0;\n\n    while (number > 0) {\n        int digit = number % 10;\n        sum += digit;\n        number = number / 10;\n    }\n\n    cout << sum;\n    return 0;\n}",
-      "answer_explanation": "The program overwrites sum with each digit. It must add each extracted digit to the existing sum using +=."
-    },
-    "r3_cpp_cpp004": {
-      "round": 3,
-      "language": "cpp",
-      "title": "Second Largest Distinct Number",
-      "kind": "test-case challenge",
-      "statement": "Given an array of N integers, find the second largest distinct number. If a second largest distinct number does not exist, print -1.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
-      "difficulty": "Difficult",
-      "marks": 20,
-      "samples": [
-        {
-          "input": "6\n10 20 40 30 40 15\n",
-          "output": "30\n"
-        }
-      ],
-      "starter": {
-        "python": "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    int numbers[100];\n    for (int i = 0; i < n; i++) {\n        cin >> numbers[i];\n    }\n\n    sort(numbers, numbers + n, greater<int>());\n\n    if (n < 2) {\n        cout << -1;\n    } else {\n        cout << numbers[1];\n    }\n\n    return 0;\n}",
-        "cpp": "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    int numbers[100];\n    for (int i = 0; i < n; i++) {\n        cin >> numbers[i];\n    }\n\n    sort(numbers, numbers + n, greater<int>());\n\n    if (n < 2) {\n        cout << -1;\n    } else {\n        cout << numbers[1];\n    }\n\n    return 0;\n}"
-      },
-      "tests": [
-        {
-          "input": "6\n10 20 40 30 40 15",
-          "expected": "30"
-        },
-        {
-          "input": "5\n7 7 7 7 7",
-          "expected": "-1"
-        },
-        {
-          "input": "6\n-10 -5 -3 -3 -8 -6",
-          "expected": "-5"
-        }
-      ],
-      "corrected_code": "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    int numbers[100];\n    for (int i = 0; i < n; i++) {\n        cin >> numbers[i];\n    }\n\n    sort(numbers, numbers + n, greater<int>());\n\n    int largest = numbers[0];\n    bool found = false;\n    int secondLargest = -1;\n\n    for (int i = 1; i < n; i++) {\n        if (numbers[i] != largest) {\n            secondLargest = numbers[i];\n            found = true;\n            break;\n        }\n    }\n\n    if (found) {\n        cout << secondLargest;\n    } else {\n        cout << -1;\n    }\n\n    return 0;\n}",
-      "answer_explanation": "The second element after sorting is not necessarily the second largest distinct number because the largest value may appear multiple times. The program must skip duplicate occurrences of the largest value."
-    },
-    "r3_cpp_cpp005": {
-      "round": 3,
-      "language": "cpp",
       "title": "First Non-Repeating Character",
       "kind": "test-case challenge",
-      "statement": "Given a string, find the first character that appears exactly once. If every character is repeated, print -1.",
-      "input_format": "Use the input format demonstrated by the test cases.",
-      "output_format": "Print exactly the required result.",
+      "statement": "A system receives a string containing lowercase English letters. Find the first character that occurs exactly once in the string. The character must be returned according to its original position. If every character appears more than once, print -1.",
+      "input_format": "The input contains a single string.",
+      "output_format": "Print the first non-repeating character. If no such character exists, print -1.",
       "difficulty": "Difficult",
       "marks": 20,
+      "constraints": [
+        "1 <= length of string <= 100000",
+        "The string contains only lowercase English letters."
+      ],
       "samples": [
         {
-          "input": "swiss\n",
-          "output": "w\n"
+          "input": "swiss",
+          "output": "w"
+        },
+        {
+          "input": "aabbccdde",
+          "output": "e"
+        },
+        {
+          "input": "programming",
+          "output": "p"
+        },
+        {
+          "input": "aabbcc",
+          "output": "-1"
         }
       ],
       "starter": {
-        "python": "#include <iostream>\nusing namespace std;\n\nint main() {\n    string text;\n    cin >> text;\n\n    for (int i = 0; i < text.length(); i++) {\n        int count = 0;\n\n        for (int j = 0; j < text.length(); j++) {\n            if (text[i] != text[j]) {\n                count++;\n            }\n        }\n\n        if (count == 1) {\n            cout << text[i];\n            return 0;\n        }\n    }\n\n    cout << -1;\n    return 0;\n}",
-        "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    string text;\n    cin >> text;\n\n    for (int i = 0; i < text.length(); i++) {\n        int count = 0;\n\n        for (int j = 0; j < text.length(); j++) {\n            if (text[i] != text[j]) {\n                count++;\n            }\n        }\n\n        if (count == 1) {\n            cout << text[i];\n            return 0;\n        }\n    }\n\n    cout << -1;\n    return 0;\n}"
+        "python": "",
+        "cpp": ""
       },
       "tests": [
         {
@@ -1192,16 +1178,168 @@
           "expected": "w"
         },
         {
-          "input": "aabbcc",
-          "expected": "-1"
+          "input": "aabbccdde",
+          "expected": "e"
         },
         {
           "input": "programming",
           "expected": "p"
+        },
+        {
+          "input": "aabbcc",
+          "expected": "-1"
         }
       ],
-      "corrected_code": "#include <iostream>\nusing namespace std;\n\nint main() {\n    string text;\n    cin >> text;\n\n    for (int i = 0; i < text.length(); i++) {\n        int count = 0;\n\n        for (int j = 0; j < text.length(); j++) {\n            if (text[i] == text[j]) {\n                count++;\n            }\n        }\n\n        if (count == 1) {\n            cout << text[i];\n            return 0;\n        }\n    }\n\n    cout << -1;\n    return 0;\n}",
-      "answer_explanation": "The inner loop incorrectly increments count when characters are different. It should count occurrences of the same character using ==. A character is non-repeating when its count is exactly one."
+      "corrected_code": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string text;\n    cin >> text;\n\n    int frequency[256] = {0};\n\n    for (char c : text) {\n        frequency[(unsigned char)c]++;\n    }\n\n    for (char c : text) {\n        if (frequency[(unsigned char)c] == 1) {\n            cout << c;\n            return 0;\n        }\n    }\n\n    cout << -1;\n\n    return 0;\n}",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
+    },
+    "r3_cpp_cpp003": {
+      "round": 3,
+      "language": "cpp",
+      "title": "Longest Consecutive Sequence",
+      "kind": "test-case challenge",
+      "statement": "You are given an unsorted array of integers. Find the length of the longest sequence of consecutive integers. The numbers in the sequence do not need to appear next to each other in the input array. Duplicate values must not increase the length.",
+      "input_format": "The first line contains N. The second line contains N space-separated integers.",
+      "output_format": "Print the length of the longest consecutive sequence.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "constraints": [
+        "1 <= N <= 100000",
+        "-1000000000 <= number <= 1000000000"
+      ],
+      "samples": [
+        {
+          "input": "6\n100 4 200 1 3 2",
+          "output": "4"
+        },
+        {
+          "input": "7\n10 5 12 3 55 4 11",
+          "output": "3"
+        },
+        {
+          "input": "5\n8 8 8 8 8",
+          "output": "1"
+        }
+      ],
+      "starter": {
+        "python": "",
+        "cpp": ""
+      },
+      "tests": [
+        {
+          "input": "6\n100 4 200 1 3 2",
+          "expected": "4"
+        },
+        {
+          "input": "7\n10 5 12 3 55 4 11",
+          "expected": "3"
+        },
+        {
+          "input": "5\n8 8 8 8 8",
+          "expected": "1"
+        }
+      ],
+      "corrected_code": "#include <iostream>\n#include <unordered_set>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n\n    unordered_set<long long> values;\n\n    for (int i = 0; i < n; i++) {\n        long long x;\n        cin >> x;\n        values.insert(x);\n    }\n\n    int longest = 0;\n\n    for (long long x : values) {\n        if (values.find(x - 1) == values.end()) {\n            long long current = x;\n            int length = 1;\n\n            while (values.find(current + 1) != values.end()) {\n                current++;\n                length++;\n            }\n\n            longest = max(longest, length);\n        }\n    }\n\n    cout << longest;\n\n    return 0;\n}",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
+    },
+    "r3_cpp_cpp004": {
+      "round": 3,
+      "language": "cpp",
+      "title": "Subarray With Target Sum",
+      "kind": "test-case challenge",
+      "statement": "You are given an array of positive integers and a target value K. Find the length of the smallest contiguous subarray whose sum is greater than or equal to K. If no such subarray exists, print 0.",
+      "input_format": "The first line contains two integers N and K. The second line contains N positive integers.",
+      "output_format": "Print the minimum length of a contiguous subarray whose sum is at least K. Print 0 if no such subarray exists.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "constraints": [
+        "1 <= N <= 100000",
+        "1 <= K <= 1000000000",
+        "1 <= array element <= 100000"
+      ],
+      "samples": [
+        {
+          "input": "6 7\n2 3 1 2 4 3",
+          "output": "2"
+        },
+        {
+          "input": "5 15\n1 2 3 4 5",
+          "output": "5"
+        },
+        {
+          "input": "4 20\n1 2 3 4",
+          "output": "0"
+        }
+      ],
+      "starter": {
+        "python": "",
+        "cpp": ""
+      },
+      "tests": [
+        {
+          "input": "6 7\n2 3 1 2 4 3",
+          "expected": "2"
+        },
+        {
+          "input": "5 15\n1 2 3 4 5",
+          "expected": "5"
+        },
+        {
+          "input": "4 20\n1 2 3 4",
+          "expected": "0"
+        }
+      ],
+      "corrected_code": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int n;\n    long long k;\n\n    cin >> n >> k;\n\n    vector<long long> numbers(n);\n\n    for (int i = 0; i < n; i++) {\n        cin >> numbers[i];\n    }\n\n    int left = 0;\n    long long currentSum = 0;\n    int minimum = n + 1;\n\n    for (int right = 0; right < n; right++) {\n        currentSum += numbers[right];\n\n        while (currentSum >= k) {\n            minimum = min(minimum, right - left + 1);\n            currentSum -= numbers[left];\n            left++;\n        }\n    }\n\n    if (minimum == n + 1) {\n        cout << 0;\n    } else {\n        cout << minimum;\n    }\n\n    return 0;\n}",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
+    },
+    "r3_cpp_cpp005": {
+      "round": 3,
+      "language": "cpp",
+      "title": "Spiral Matrix Traversal",
+      "kind": "test-case challenge",
+      "statement": "You are given a rectangular matrix with N rows and M columns. Print all elements of the matrix in spiral order, starting from the top-left corner. The traversal must move right, down, left and up repeatedly while avoiding already visited cells.",
+      "input_format": "The first line contains N and M. The next N lines contain M space-separated integers.",
+      "output_format": "Print all matrix elements in spiral order separated by spaces.",
+      "difficulty": "Difficult",
+      "marks": 20,
+      "constraints": [
+        "1 <= N, M <= 100",
+        "-1000 <= matrix element <= 1000"
+      ],
+      "samples": [
+        {
+          "input": "3 4\n1 2 3 4\n5 6 7 8\n9 10 11 12",
+          "output": "1 2 3 4 8 12 11 10 9 5 6 7"
+        },
+        {
+          "input": "2 3\n1 2 3\n4 5 6",
+          "output": "1 2 3 6 5 4"
+        },
+        {
+          "input": "1 4\n7 8 9 10",
+          "output": "7 8 9 10"
+        }
+      ],
+      "starter": {
+        "python": "",
+        "cpp": ""
+      },
+      "tests": [
+        {
+          "input": "3 4\n1 2 3 4\n5 6 7 8\n9 10 11 12",
+          "expected": "1 2 3 4 8 12 11 10 9 5 6 7"
+        },
+        {
+          "input": "2 3\n1 2 3\n4 5 6",
+          "expected": "1 2 3 6 5 4"
+        },
+        {
+          "input": "1 4\n7 8 9 10",
+          "expected": "7 8 9 10"
+        }
+      ],
+      "corrected_code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n\n    vector<vector<int>> matrix(n, vector<int>(m));\n\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < m; j++) {\n            cin >> matrix[i][j];\n        }\n    }\n\n    int top = 0;\n    int bottom = n - 1;\n    int left = 0;\n    int right = m - 1;\n\n    vector<int> result;\n\n    while (top <= bottom && left <= right) {\n\n        for (int col = left; col <= right; col++) {\n            result.push_back(matrix[top][col]);\n        }\n        top++;\n\n        for (int row = top; row <= bottom; row++) {\n            result.push_back(matrix[row][right]);\n        }\n        right--;\n\n        if (top <= bottom) {\n            for (int col = right; col >= left; col--) {\n                result.push_back(matrix[bottom][col]);\n            }\n            bottom--;\n        }\n\n        if (left <= right) {\n            for (int row = bottom; row >= top; row--) {\n                result.push_back(matrix[row][left]);\n            }\n            left++;\n        }\n    }\n\n    for (int i = 0; i < result.size(); i++) {\n        if (i > 0) cout << \" \";\n        cout << result[i];\n    }\n\n    return 0;\n}",
+      "answer_explanation": "Reference solution for backend/judge validation only. Do not expose this code to participants."
     }
   }
 }
