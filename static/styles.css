@@ -55,3 +55,99 @@ button{cursor:pointer}
 #testGrid {
   display: none !important;
 }
+
+/* Mobile quiz protection */
+body.quiz-active #competition,
+body.quiz-active #competition * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Keep code editing and cursor selection usable.
+   JavaScript blocks clipboard actions separately. */
+body.quiz-active #competition textarea,
+body.quiz-active #competition input {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Phone layout and readable code input */
+@media (max-width: 600px) {
+  .problem-layout > *,
+  .hero > * {
+    min-width: 0;
+  }
+
+  #roundPanel {
+    padding: 16px;
+  }
+
+  .problem-card,
+  .editor-card {
+    padding: 14px;
+  }
+
+  .editor-toolbar {
+    flex-wrap: wrap;
+  }
+
+  input,
+  select,
+  textarea,
+  .editor {
+    font-size: 16px;
+  }
+
+  .qtext,
+  .sample,
+  .console,
+  .option span {
+    overflow-wrap: anywhere;
+  }
+
+  .option span {
+    white-space: pre-wrap;
+  }
+
+  .option {
+    min-height: 48px;
+  }
+
+  .toast {
+    left: 12px;
+    right: 12px;
+    bottom: 16px;
+    max-width: none;
+  }
+}
+
+/* HASH logo on laptop and phone */
+.hash-club-logo {
+  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .hash-club-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand-wrap {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .topbar h1 {
+    font-size: 18px;
+  }
+
+  .brand-wrap .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+}

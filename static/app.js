@@ -1699,194 +1699,278 @@ $('a[href="/api/results.csv"]')?.addEventListener(
 
 
 
-// ---------- Anti-copy and tab-switch reset ----------
+// ---------- Desktop and mobile quiz protection ----------
 
+// Keep the existing tabResetTriggered variable near the top.
+// Do not declare it again here.
 
+function blockQuizClipboard(event) {
+  if (!isQuizActive()) return;
 
-const protectionStyle = document.createElement('style');
-
-protectionStyle.textContent = `
-
-  body.quiz-active #competition {
-
-    -webkit-user-select: none;
-
-    user-select: none;
-
-    -webkit-touch-callout: none;
-
-  }
-
-
-
-  body.quiz-active #competition textarea,
-
-  body.quiz-active #competition input {
-
-    -webkit-user-select: text;
-
-    user-select: text;
-
-  }
-
-
-
-  @media print {
-
-    body.quiz-active #competition {
-
-      display: none !important;
-
-    }
-
-  }
-
-`;
-
-document.head.appendChild(protectionStyle);
-
-
-
-for (const eventName of ['copy', 'cut', 'contextmenu', 'dragstart']) {
-
-  document.addEventListener(eventName, event => {
-
-    if (isQuizActive()) event.preventDefault();
-
-  }, true);
-
+  event.preventDefault();
+  event.stopImmediatePropagation();
 }
 
+// Blocks ordinary keyboard and mobile-menu clipboard actions.
+for (const eventName of [
+  'copy',
+  'cut',
+  'paste',
+  'contextmenu',
+  'dragstart',
+  'drop'
+]) {
+  document.addEventListener(eventName, blockQuizClipboard, true);
+}
 
-
-document.addEventListener('selectstart', event => {
-
+// Additional protection for paste/drop into editable fields.
+document.addEventListener('beforeinput', event => {
   if (!isQuizActive()) return;
 
-
-
-  if (!event.target.closest?.('textarea, input')) {
-
+  if (
+    event.inputType === 'insertFromPaste' ||
+    event.inputType === 'insertFromPasteAsQuotation' ||
+    event.inputType === 'insertFromDrop'
+  ) {
     event.preventDefault();
-
   }
-
 }, true);
 
-
-
-document.addEventListener('keydown', event => {
-
+// Question text cannot be selected.
+// Code-editor selection remains available for normal editing.
+document.addEventListener('selectstart', event => {
   if (!isQuizActive()) return;
 
+  const target = event.target;
+  const editable = target instanceof Element &&
+    target.closest('textarea, input, [contenteditable="true"]');
 
+  if (!editable) event.preventDefault();
+}, true);
+
+// Desktop and external phone/tablet keyboard shortcuts.
+document.addEventListener('keydown', event => {
+  if (!isQuizActive()) return;
 
   const key = event.key.toLowerCase();
 
-
-
   const blocked =
-
     ((event.ctrlKey || event.metaKey) &&
-
-      ['c', 'x', 'p', 's'].includes(key)) ||
-
+      ['c', 'x', 'v', 'p', 's'].includes(key)) ||
     (event.ctrlKey && event.key === 'Insert') ||
-
+    (event.shiftKey && event.key === 'Insert') ||
     (event.shiftKey && event.key === 'Delete');
 
-
-
   if (blocked) event.preventDefault();
-
 }, true);
 
-
-
-document.addEventListener('visibilitychange', () => {
-
-  if (!document.hidden || !isQuizActive() || tabResetTriggered) return;
-
-
+function invalidateQuizForLeaving() {
+  if (!isQuizActive() || tabResetTriggered) return;
 
   tabResetTriggered = true;
-
   stopTimer();
 
-
-
   try {
-
     sessionStorage.setItem('quizTabReset', 'yes');
-
   } catch (_) {}
 
+  // Remove visible questions and entered code immediately.
+  const panel = document.querySelector('#roundPanel');
 
+  if (panel) {
+    panel.textContent =
+      'You left the quiz screen. Return to restart from Round 1.';
+  }
 
-  window.location.reload();
+  state.editorCache = {};
+  state.round1Questions = [];
+  state.round1Token = null;
+  state.round1Result = null;
+  state.round2Problems = [];
+  state.round3Problems = [];
 
-});
+  privateReceipts[2] = {};
+  privateReceipts[3] = {};
 
+  // Reload on return rather than relying on a background reload.
+}
 
-
-function showTabResetMessage() {
-
+function resumeQuizScreen() {
   if (document.hidden) return;
 
+  if (tabResetTriggered) {
+    window.location.reload();
+    return;
+  }
 
+  showTabResetMessage();
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    invalidateQuizForLeaving();
+  } else {
+    resumeQuizScreen();
+  }
+});
+
+// Also handle navigation away and restoration from browser history.
+window.addEventListener('pagehide', invalidateQuizForLeaving);
+
+window.addEventListener('pageshow', () => {
+  resumeQuizScreen();
+});
+
+// Fallback return check. Losing focus alone does not reset the quiz,
+// because keyboards and browser dialogs can affect focus.
+window.addEventListener('focus', resumeQuizScreen);
+
+function showTabResetMessage() {
+  if (document.hidden) return;
+
+  let wasReset = false;
 
   try {
+    wasReset = sessionStorage.getItem('quizTabReset') === 'yes';
 
-    if (sessionStorage.getItem('quizTabReset') === 'yes') {
-
+    if (wasReset) {
       sessionStorage.removeItem('quizTabReset');
-
-
-
-      alert(
-
-        'You left the quiz tab. Your answers and code were cleared. ' +
-
-        'Start again from Round 1.'
-
-      );
-
     }
-
   } catch (_) {}
 
-}
+  if (!wasReset) return;
 
-
-
-document.addEventListener('visibilitychange', showTabResetMessage);
-
-
-
-// Add the rule notice if it is not already in the HTML.
-
-if (!$('#startForm').textContent.includes('Switching tabs')) {
-
-  const notice = document.createElement('p');
-
+  const notice = document.createElement('div');
   notice.className = 'result-banner bad';
-
+  notice.setAttribute('role', 'alert');
   notice.textContent =
+    'You left the quiz screen. Your unfinished attempt was cleared. ' +
+    'Start again from Round 1.';
 
-    'Quiz rules: Copying questions is blocked. Switching tabs, ' +
-
-    'minimizing the browser or switching apps clears your attempt. ' +
-
-    'You must then start again from Round 1.';
-
-
-
-  $('#startButton').before(notice);
-
+  const form = document.querySelector('#startForm');
+  if (form) form.prepend(notice);
 }
 
+// Update the existing rules notice or insert one.
+const startForm = document.querySelector('#startForm');
 
+if (startForm) {
+  let rules = document.querySelector('#quizProtectionRules');
+
+  if (!rules) {
+    rules = [...startForm.querySelectorAll('p')].find(element =>
+      /quiz rules:|switching tabs/i.test(element.textContent)
+    );
+  }
+
+  if (!rules) {
+    rules = document.createElement('p');
+    document.querySelector('#startButton').before(rules);
+  }
+
+  rules.id = 'quizProtectionRules';
+  rules.className = 'result-banner bad';
+  rules.textContent =
+    'Quiz rules: Copying, cutting and pasting are blocked during ' +
+    'the quiz. Leaving this tab or switching apps resets your ' +
+    'unfinished attempt when detected. Locking your phone or ' +
+    'answering a call may also reset it. Stay on this screen ' +
+    'until submission is confirmed.';
+}
 
 showTabResetMessage();
-
 init();
+
+// Add a Reset All Results button to the admin panel.
+(function addAdminResetButton() {
+  const closeButton = document.getElementById('closeAdmin');
+
+  if (!closeButton || document.getElementById('resetAllResults')) {
+    return;
+  }
+
+  const resetButton = document.createElement('button');
+  resetButton.id = 'resetAllResults';
+  resetButton.type = 'button';
+  resetButton.className = 'ghost';
+  resetButton.textContent = 'Reset All Results';
+  resetButton.style.color = '#fb7185';
+  resetButton.style.borderColor = '#fb7185';
+
+  closeButton.before(resetButton);
+
+  resetButton.addEventListener('click', async () => {
+    if (!adminPassword) {
+      toast('Please log in to the admin panel first.', 'error');
+      return;
+    }
+
+    const confirmed = window.confirm(
+      'Delete ALL saved participant results?\n\n' +
+      'This cannot be undone. Export CSV first if you need a backup.'
+    );
+
+    if (!confirmed) return;
+
+    resetButton.disabled = true;
+    resetButton.textContent = 'Resetting...';
+
+    try {
+      const response = await fetch('/api/results/reset', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': adminPassword
+        },
+        cache: 'no-store',
+        body: JSON.stringify({})
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.reset !== true) {
+        throw new Error(data.error || 'Could not reset results.');
+      }
+
+      // Verify deletion before showing an empty results table.
+      const checkResponse = await fetch('/api/results', {
+        headers: {
+          'X-Admin-Password': adminPassword
+        },
+        cache: 'no-store'
+      });
+
+      const checkData = await checkResponse.json();
+
+      if (!checkResponse.ok) {
+        throw new Error(
+          checkData.error || 'Could not verify the remaining results.'
+        );
+      }
+
+      if (!Array.isArray(checkData.results)) {
+        throw new Error('Could not verify the remaining results.');
+      }
+
+      if (checkData.results.length > 0) {
+        throw new Error(
+          'Some results remain or a new submission arrived. ' +
+          'Close and reopen the admin panel to refresh.'
+        );
+      }
+
+      document.getElementById('resultsTable').innerHTML =
+        '<p class="muted">No saved attempts yet.</p>';
+
+      toast(
+        `${data.deleted} saved participant result(s) deleted.`,
+        'success'
+      );
+    } catch (error) {
+      toast(error.message || 'Reset failed. Please try again.', 'error');
+    } finally {
+      resetButton.disabled = false;
+      resetButton.textContent = 'Reset All Results';
+    }
+  });
+})();
